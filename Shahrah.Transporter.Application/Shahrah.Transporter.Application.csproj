@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.2.1" />
+    <PackageReference Include="GraphQL.Client" Version="5.1.0" />
+    <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="5.1.0" />
+    <PackageReference Include="GraphQL.MicrosoftDI" Version="7.1.1" />
+    <PackageReference Include="GraphQL.SystemTextJson" Version="7.1.1" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="SlimMessageBus" Version="1.8.0-rc1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shahrah.Transporter.Domain\Shahrah.Transporter.Domain.csproj" />
+    <ProjectReference Include="..\..\shahrah-framework\Shahrah.Framework\Shahrah.Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Drivers\Commands\" />
+    <Folder Include="FinancialTransactions\Commands\" />
+    <Folder Include="FinancialTransactions\EventHandlers\" />
+    <Folder Include="FinancialTransactions\Queries\" />
+    <Folder Include="People\EventHandlers\" />
+    <Folder Include="Vehicles\EventHandlers\" />
+  </ItemGroup>
+
+</Project>

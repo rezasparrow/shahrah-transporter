@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <UserSecretsId>3c6d3eea-7da6-4a15-836a-6e63286a3bb2</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Properties\launchSettings.json~RF9572e9.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.1" />
+    <PackageReference Include="IdentityModel" Version="6.0.0" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="SlimMessageBus" Version="1.8.0-rc1" />
+    <PackageReference Include="SlimMessageBus.Host.AspNetCore" Version="1.8.0-rc1" />
+    <PackageReference Include="SlimMessageBus.Host.Hybrid" Version="1.23.0-rc2" />
+    <PackageReference Include="SlimMessageBus.Host.Kafka" Version="1.23.0-rc2" />
+    <PackageReference Include="SlimMessageBus.Host.Outbox" Version="1.2.0-rc3" />
+    <PackageReference Include="SlimMessageBus.Host.Outbox.DbContext" Version="1.2.0-rc3" />
+    <PackageReference Include="SlimMessageBus.Host.Serialization.Json" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shahrah.Transporter.Application\Shahrah.Transporter.Application.csproj" />
+    <ProjectReference Include="..\Shahrah.Transporter.Domain\Shahrah.Transporter.Domain.csproj" />
+    <ProjectReference Include="..\Shahrah.Transporter.Infrastructure\Shahrah.Transporter.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\shahrah-framework\Shahrah.Framework\Shahrah.Framework.csproj" />
+  </ItemGroup>
+
+</Project>
