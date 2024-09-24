@@ -12,9 +12,9 @@ public class PlanConfiguration : IEntityTypeConfiguration<Plan>
         builder.Property(p => p.Days).IsRequired();
         builder.Property(p => p.Price).IsRequired();
 
-        builder.HasData(new Plan(1) { Title = "یک ماهه", Days = 30, Price = 1000000 });
-        builder.HasData(new Plan(2) { Title = "سه ماهه", Days = 90, Price = 2800000 });
-        builder.HasData(new Plan(3) { Title = "شش ماهه", Days = 180, Price = 5500000 });
+        builder.HasData(new Plan(1) { Title = "یک ماهه", Days = 30, Price = 1000000 ,Description = "یک ماه" });
+        builder.HasData(new Plan(2) { Title = "سه ماهه", Days = 90, Price = 2800000 , Description = "سه ماهه"});
+        builder.HasData(new Plan(3) { Title = "شش ماهه", Days = 180, Price = 5500000 , Description  = "شش ماهه" });
 
         builder.HasMany(cp => cp.Subscriptions).WithOne(c => c.Plan).HasForeignKey(cp => cp.PlanId);
     }

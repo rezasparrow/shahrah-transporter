@@ -1,0 +1,20 @@
+<Project>
+  <PropertyGroup>
+    <Authors>The Shahrah24 Team Authors</Authors>
+    <Copyright>Copyright 2023 The mdp Authors</Copyright>
+    <Deterministic>false</Deterministic>
+
+    <!-- Include PDB in the built .nupkg -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+    
+	<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+
+  </PropertyGroup>
+
+ 
+
+</Project>
