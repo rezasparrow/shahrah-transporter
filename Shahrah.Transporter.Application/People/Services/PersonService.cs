@@ -183,11 +183,11 @@ public class PersonService : IPersonService
         switch (person.PersonType)
         {
             case PersonTypeEnum.Owner:
-                await RemoveTransporter(person.TransporterId);
+                RemoveTransporter(person.TransporterId);
                 break;
 
             case PersonTypeEnum.Agent:
-                await RemoveAgent(person.Id);
+                RemoveAgent(person.Id);
                 break;
 
             default:
@@ -258,7 +258,7 @@ public class PersonService : IPersonService
                 t.AgentRegistrationStatus != AgentRegistrationStatus.Revoked);
     }
 
-    private async Task RemoveTransporter(long transporterId)
+    private void RemoveTransporter(long transporterId)
     {
         // TODO: Javad Rasouli >> بستن اکانت مشکل داره
         throw new NotImplementedException();
@@ -284,7 +284,7 @@ public class PersonService : IPersonService
         //return Unit.Value;
     }
 
-    private async Task RemoveAgent(long personId)
+    private void RemoveAgent(long personId)
     {
         // TODO: Javad Rasouli >> پیاده سازی بستن اکانت ایجنت
         throw new NotImplementedException();

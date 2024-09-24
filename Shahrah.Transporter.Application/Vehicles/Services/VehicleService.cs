@@ -49,7 +49,7 @@ public class VehicleService : IVehicleService
         if (vehicle == null)
             throw new DomainException(ErrorMessageResource.VehicleNotFound);
 
-        var response = await _messageBus.Send<AssignVehicleToDriverResponse, AssignVehicleToDriverRequest>(new AssignVehicleToDriverRequest
+        AssignVehicleToDriverRequest request = new AssignVehicleToDriverRequest
         {
             DriverId = driverId,
             TransporterId = person.TransporterId,
@@ -68,7 +68,8 @@ public class VehicleService : IVehicleService
             TruckId = vehicle.TruckId,
             VIN = vehicle.Vin,
             VehicleOptionItemsIdentitites = vehicle.VehicleOptionItems?.Select(t => t.OptionItemId) ?? new List<int>()
-        }, cancellationToken: cancellationToken);
+        };
+        var response = await _messageBus.Send<AssignVehicleToDriverResponse, AssignVehicleToDriverRequest>(request, cancellationToken: cancellationToken);
 
         if (response.Result == AssignVehicleToDriverResultEnum.DriverNotFound)
             throw new DomainException(ErrorMessageResource.DriverNotFound);

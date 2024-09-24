@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shahrah.Transporter.Api", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shahrah.Framework", "..\shahrah-framework\Shahrah.Framework\Shahrah.Framework.csproj", "{19A1B150-5452-4415-B8E3-C8B51140BCE3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shahrah.Transporter.Worker", "Shahrah.Transporter.Worker\Shahrah.Transporter.Worker.csproj", "{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{19A1B150-5452-4415-B8E3-C8B51140BCE3}.Release|x64.Build.0 = Release|Any CPU
 		{19A1B150-5452-4415-B8E3-C8B51140BCE3}.Release|x86.ActiveCfg = Release|Any CPU
 		{19A1B150-5452-4415-B8E3-C8B51140BCE3}.Release|x86.Build.0 = Release|Any CPU
+		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Debug|x64.Build.0 = Debug|Any CPU
+		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Debug|x86.Build.0 = Debug|Any CPU
+		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Release|x64.ActiveCfg = Release|Any CPU
+		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Release|x64.Build.0 = Release|Any CPU
+		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

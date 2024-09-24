@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <UserSecretsId>3c6d3eea-7da6-4a15-836a-6e63286a3bb2</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
@@ -12,18 +12,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.1" />
-    <PackageReference Include="IdentityModel" Version="6.0.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
+    <PackageReference Include="IdentityModel" Version="7.0.0" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
-    <PackageReference Include="MediatR" Version="10.0.1" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-    <PackageReference Include="SlimMessageBus" Version="1.8.0-rc1" />
-    <PackageReference Include="SlimMessageBus.Host.AspNetCore" Version="1.8.0-rc1" />
-    <PackageReference Include="SlimMessageBus.Host.Hybrid" Version="1.23.0-rc2" />
-    <PackageReference Include="SlimMessageBus.Host.Kafka" Version="1.23.0-rc2" />
-    <PackageReference Include="SlimMessageBus.Host.Outbox" Version="1.2.0-rc3" />
-    <PackageReference Include="SlimMessageBus.Host.Outbox.DbContext" Version="1.2.0-rc3" />
-    <PackageReference Include="SlimMessageBus.Host.Serialization.Json" Version="1.5.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="SlimMessageBus.Host.AspNetCore" Version="2.5.3" />
+    <PackageReference Include="SlimMessageBus.Host.Kafka" Version="2.5.3" />
+    <PackageReference Include="SlimMessageBus.Host.Outbox" Version="2.5.3" />
+    <PackageReference Include="SlimMessageBus.Host.Outbox.DbContext" Version="2.5.3" />
+    <PackageReference Include="SlimMessageBus.Host.Serialization.Json" Version="2.5.3" />
   </ItemGroup>
 
   <ItemGroup>

@@ -25,7 +25,10 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-builder.Services.AddMediatR(Assembly.Load("Shahrah.Transporter.Application"));
+builder.Services.AddMediatR(x =>
+{
+    x.RegisterServicesFromAssembly(Assembly.Load("Shahrah.Transporter.Application"));
+});
 builder.Services.AddValidatorsFromAssembly(Assembly.Load("Shahrah.Transporter.Application"));
 
 builder.Services.AddServices();

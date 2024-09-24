@@ -80,7 +80,7 @@ public class CloseOrderService : ICloseOrderService
         await _dbContext.SaveChangesAsync();
         await NoticeReceiversOrderClosed(order);
         await _messageBus.Publish(new OrderClosedEvent(order.CorrelationId, order.Id, order.SenderRequestId));
-        await RemoveOrderJobs(order.Id);
+        RemoveOrderJobs(order.Id);
     }
 
     private async Task NoticeReceiversOrderClosed(Order order)
@@ -92,7 +92,7 @@ public class CloseOrderService : ICloseOrderService
                 await _notificationService.SendToPerson(receiver.PersonId, x => x.OrderClosed(order.Id));
     }
 
-    private async Task RemoveOrderJobs(int orderId)
+    private void RemoveOrderJobs(int orderId)
     {
          _jobScheduler.Remove<OrderPendingFinishedJob>(orderId.ToString());
          _jobScheduler.Remove<OrderPricingFinishedJob>(orderId.ToString());

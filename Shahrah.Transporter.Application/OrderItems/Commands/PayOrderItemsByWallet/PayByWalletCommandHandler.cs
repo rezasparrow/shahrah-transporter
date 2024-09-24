@@ -14,9 +14,8 @@ public class PayByWalletCommandHandler : IRequestHandler<PayByWalletCommand>
         _orderItemPaymentService = orderItemPaymentService;
     }
 
-    public async Task<Unit> Handle(PayByWalletCommand request, CancellationToken cancellationToken)
+    public async Task Handle(PayByWalletCommand request, CancellationToken cancellationToken)
     {
         await _orderItemPaymentService.PayByWallet(request.PersonId, request.OrderItemIdentities, cancellationToken);
-        return Unit.Value;
     }
 }

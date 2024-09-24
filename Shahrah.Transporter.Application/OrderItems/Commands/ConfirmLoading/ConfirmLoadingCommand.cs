@@ -8,7 +8,7 @@ namespace Shahrah.Transporter.Application.OrderItems.Commands.ConfirmLoading;
 /// این به این معنی نیست که بار حتما بارگیری شده
 /// بلکه اعلام یکی از سه نفر میباشد
 /// </summary>
-public class ConfirmLoadingCommand : IRequest<Unit>, ITransactionalCommand
+public class ConfirmLoadingCommand : IRequest, ITransactionalCommand
 {
     public ConfirmLoadingCommand(int orderItemId, long personId)
     {

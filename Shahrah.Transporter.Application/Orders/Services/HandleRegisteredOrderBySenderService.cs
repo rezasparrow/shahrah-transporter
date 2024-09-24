@@ -40,12 +40,12 @@ public class HandleRegisteredOrderBySenderService : IHandleRegisteredOrderBySend
         await SpecifyOrderRecivers(orderRegisteredBySenderEvent, order);
         await RegisterOrderInDataBase(order);
         await NotifyRecivers(order);
-        await ScheduleOrderPricingJob(order);
+        ScheduleOrderPricingJob(order);
 
         await _transporterRegisteredSenderOrderEventPublisher.Publish(order.Id, order.PersonId);
     }
 
-    private async Task ScheduleOrderPricingJob(Order order)
+    private void ScheduleOrderPricingJob(Order order)
     {
         if (order.SearchOrPendingOrPricingDeadlineExpiredTime.HasValue)
              _jobScheduler.ScheduleAt<OrderPricingFinishedJob>(builder =>

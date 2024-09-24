@@ -41,7 +41,7 @@ namespace Shahrah.Transporter.Api.Controllers
 
         [HttpPost("ReqRes")]
         [AllowAnonymous]
-        public async Task<IActionResult> ReqRes()
+        public IActionResult ReqRes()
         {
             return Ok();
         }

@@ -14,9 +14,8 @@ public class ConfirmLoadingCommandHandler : IRequestHandler<ConfirmLoadingComman
         _orderItemService = orderItemService;
     }
 
-    public async Task<Unit> Handle(ConfirmLoadingCommand request, CancellationToken cancellationToken)
+    public async Task Handle(ConfirmLoadingCommand request, CancellationToken cancellationToken)
     {
         await _orderItemService.ConfirmLoading(request.OrderItemId, request.PersonId, cancellationToken);
-        return Unit.Value;
     }
 }

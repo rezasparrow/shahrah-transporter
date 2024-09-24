@@ -14,11 +14,8 @@ public class RegisterWaybillCodeCommandHandler : IRequestHandler<RegisterWaybill
         _orderItemService = orderItemService;
     }
 
-    public async Task<Unit> Handle(RegisterWaybillCodeCommand request, CancellationToken cancellationToken)
+    public async Task Handle(RegisterWaybillCodeCommand request, CancellationToken cancellationToken)
     {
-        await _orderItemService.RegisterWaybillCode(request.OrderItemId, request.PersonId, request.WaybillCode,
-            cancellationToken);
-
-        return Unit.Value;
+        await _orderItemService.RegisterWaybillCode(request.OrderItemId, request.PersonId, request.WaybillCode,cancellationToken);
     }
 }

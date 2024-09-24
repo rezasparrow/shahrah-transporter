@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.OrderItems.Commands.OrderItemTechnicalyConfirmed;
 
-public class OrderItemTechnicalyConfirmedCommandHandler : IRequestHandler<OrderItemTechnicalyConfirmedCommand, Unit>
+public class OrderItemTechnicalyConfirmedCommandHandler : IRequestHandler<OrderItemTechnicalyConfirmedCommand>
 {
     private readonly IOrderItemService _orderItemService;
 
@@ -14,9 +14,8 @@ public class OrderItemTechnicalyConfirmedCommandHandler : IRequestHandler<OrderI
         _orderItemService = orderItemService;
     }
 
-    public async Task<Unit> Handle(OrderItemTechnicalyConfirmedCommand request, CancellationToken cancellationToken)
+    public async Task Handle(OrderItemTechnicalyConfirmedCommand request, CancellationToken cancellationToken)
     {
         await _orderItemService.ConfirmTechnicalApprove(request.OrderItemId, request.PersonId, cancellationToken);
-        return Unit.Value;
     }
 }

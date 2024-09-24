@@ -98,7 +98,7 @@ public class AuctionService : IAuctionService
         {
             orderItem.Status = OrderItemStatus.Canceled;
             _dbContext.OrderItems.Update(orderItem);
-            await RemoveOrderItemJobs(orderItem);
+            RemoveOrderItemJobs(orderItem);
             await _orderItemChangeStateEventPublisher.Publish(orderItem.Id, null, OrderItemChangeStateReasonEnum.PendingAuctionTimeout);
         }
 
@@ -110,7 +110,7 @@ public class AuctionService : IAuctionService
         await _closeOrderService.Close(CloseOrderTypeEnum.TryToClose, order.Id, order.PersonId ?? throw new NullReferenceException("personid can not be null..."));
     }
 
-    private async Task RemoveOrderItemJobs(OrderItem orderItem)
+    private void RemoveOrderItemJobs(OrderItem orderItem)
     {
          _jobScheduler.Remove<OrderItemAttemptToPayExpiredJob>(orderItem.Id.ToString());
          _jobScheduler.Remove<OrderItemPendingPaymentExpiredJob>(orderItem.Id.ToString());

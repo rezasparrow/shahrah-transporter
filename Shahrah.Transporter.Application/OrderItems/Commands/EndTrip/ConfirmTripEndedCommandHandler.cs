@@ -14,9 +14,8 @@ public class ConfirmTripEndedCommandHandler : IRequestHandler<ConfirmTripEndedCo
         _orderItemService = orderItemService;
     }
 
-    public async Task<Unit> Handle(ConfirmTripEndedCommand request, CancellationToken cancellationToken)
+    public async Task Handle(ConfirmTripEndedCommand request, CancellationToken cancellationToken)
     {
         await _orderItemService.ConfirmTripEnded(request.OrderItemId, request.PersonId, cancellationToken);
-        return Unit.Value;
     }
 }

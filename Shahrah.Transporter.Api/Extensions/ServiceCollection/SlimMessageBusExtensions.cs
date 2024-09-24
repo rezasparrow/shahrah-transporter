@@ -8,7 +8,7 @@ using Shahrah.Transporter.Application.Drivers.EventHandlers;
 using Shahrah.Transporter.Application.OrderItems.EventHandlers;
 using Shahrah.Transporter.Application.Orders.EventHandlers;
 using Shahrah.Transporter.Application.Transporters.RequestHandlers;
-using SlimMessageBus.Host.AspNetCore;
+using SlimMessageBus.Host;
 using SlimMessageBus.Host.Hybrid;
 using SlimMessageBus.Host.Kafka;
 using SlimMessageBus.Host.Outbox;
@@ -26,11 +26,12 @@ namespace Shahrah.Transporter.Api.Extensions.ServiceCollection
             const string orderTopicName = "Order-Topic";
             var kafkaGroup = configuration["Kafka:Group"];
 
-            services.AddSlimMessageBus((mbb, _) =>
+            services.AddSlimMessageBus(mbb =>
             {
-                mbb.AddChildBus("kafka", mbb =>
+                mbb = mbb.AddServicesFromAssembly(typeof(SenderOrderClosedEventHandler).Assembly);
+                mbb = mbb.AddChildBus("kafka", mbb =>
                 {
-                    mbb
+                     mbb
                         .Produce<OrderBaseEvent>(x => x.DefaultTopic(orderTopicName).KeyProvider((order, _) => order.GetKeyBytes()))
                         .Produce<TransportersVehicleUpdatedEvent>(x => x.DefaultTopic(orderTopicName))
 
@@ -52,9 +53,10 @@ namespace Shahrah.Transporter.Api.Extensions.ServiceCollection
 
                         .Consume<TestEvent>(x => x.WithConsumer<TransactionTestEventHandler>().Topic(orderTopicName).KafkaGroup(kafkaGroup))
 
-                        .Handle<FindTransporterRequest, FindTransporterResponse>(s =>
+                        .Handle<FindTransporterRequest, FindTransporterResponse>((HandlerBuilder<FindTransporterRequest, FindTransporterResponse> s) =>
                          {
-                             s.Topic(s.MessageType.Name, t =>
+
+                             s.Topic(s.ConsumerSettings.MessageType.Name, t =>
                              {
                                  t.WithHandler<FindTransporterRequestHandler>().KafkaGroup(configuration["Kafka:Group"]);
                              });
@@ -66,14 +68,15 @@ namespace Shahrah.Transporter.Api.Extensions.ServiceCollection
                             x.DefaultTimeout(TimeSpan.FromSeconds(int.Parse(configuration["Kafka:TimeOut"])));
                         })
                         .PerMessageScopeEnabled(true)
-                        .WithProviderKafka(new KafkaMessageBusSettings(configuration["Kafka:Brokers"])
+                        .WithProviderKafka(x =>
                         {
-                            ProducerConfig = config =>
+                            x.BrokerList = configuration["Kafka:Brokers"];
+                            x.ProducerConfig = config =>
                             {
                                 config.LingerMs = 5;
                                 config.SocketNagleDisable = true;
-                            },
-                            ConsumerConfig = config =>
+                            };
+                            x.ConsumerConfig = config =>
                             {
                                 config.FetchErrorBackoffMs = 1;
                                 config.SocketNagleDisable = true;
@@ -81,14 +84,15 @@ namespace Shahrah.Transporter.Api.Extensions.ServiceCollection
                                 config.SessionTimeoutMs = 7000;
                                 config.AutoOffsetReset = AutoOffsetReset.Earliest;
                                 config.Acks = Acks.All;
-                            }
+                            };
                         })
                         .UseOutbox()
                         .UseTransactionScope();
                 })
-                .WithSerializer(new JsonMessageSerializer())
-                .WithProviderHybrid();
-            }, addConsumersFromAssembly: new[] { typeof(SenderOrderClosedEventHandler).Assembly });
+                .WithSerializer<JsonMessageSerializer>();
+
+                mbb.WithProviderHybrid();
+            });
 
             //services.AddMessageBusOutboxUsingDbContext<ApplicationDbContext>(opts =>
             //{
