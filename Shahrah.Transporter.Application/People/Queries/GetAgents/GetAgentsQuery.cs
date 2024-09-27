@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Application.People.Queries.GetAgents;
 
-public class GetAgentsQuery : IRequest<IEnumerable<PersonDto>>
+public class GetAgentsQuery : IRequest<List<PersonDto>>
 {
     public long PersonId { get; }
 

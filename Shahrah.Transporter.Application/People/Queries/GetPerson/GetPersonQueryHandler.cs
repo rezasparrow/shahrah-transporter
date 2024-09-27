@@ -7,7 +7,7 @@ using Shahrah.Transporter.Application.People.Models;
 
 namespace Shahrah.Transporter.Application.People.Queries.GetPerson;
 
-public class GetPersonQueryHandler : IRequestHandler<GetPersonQuery, PersonDto>
+public class GetPersonQueryHandler : IRequestHandler<GetPersonQuery, PersonDto?>
 {
     private readonly IApplicationDbContext _dbContext;
 
@@ -16,9 +16,10 @@ public class GetPersonQueryHandler : IRequestHandler<GetPersonQuery, PersonDto>
         _dbContext = dbContext;
     }
 
-    public async Task<PersonDto> Handle(GetPersonQuery request, CancellationToken cancellationToken)
+    public async Task<PersonDto?> Handle(GetPersonQuery request, CancellationToken cancellationToken)
     {
         var person = await _dbContext.People
+            .Where(x=>x.Id == request.PersonId)
             .SingleOrDefaultAsync(person => person.Id == request.PersonId, cancellationToken);
 
         return person != null ? new PersonDto(person) : null;

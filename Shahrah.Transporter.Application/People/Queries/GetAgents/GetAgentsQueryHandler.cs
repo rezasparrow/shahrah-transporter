@@ -12,7 +12,7 @@ using Shahrah.Transporter.Domain.Enums;
 
 namespace Shahrah.Transporter.Application.People.Queries.GetAgents;
 
-public class GetAgentsQueryHandler : IRequestHandler<GetAgentsQuery, IEnumerable<PersonDto>>
+public class GetAgentsQueryHandler : IRequestHandler<GetAgentsQuery, List<PersonDto>>
 {
     private readonly IApplicationDbContext _dbContext;
 
@@ -21,7 +21,7 @@ public class GetAgentsQueryHandler : IRequestHandler<GetAgentsQuery, IEnumerable
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<PersonDto>> Handle(GetAgentsQuery request, CancellationToken cancellationToken)
+    public async Task<List<PersonDto>> Handle(GetAgentsQuery request, CancellationToken cancellationToken)
     {
         var person = await _dbContext.People
             .SingleAsync(person => person.Id == request.PersonId, cancellationToken);
@@ -30,8 +30,9 @@ public class GetAgentsQueryHandler : IRequestHandler<GetAgentsQuery, IEnumerable
             throw new DomainException(ErrorMessageResource.AuthorizationFailed);
 
         var agents = await _dbContext.People.Where(t => t.TransporterId == person.TransporterId)
+            
             .ToListAsync(cancellationToken);
 
-        return agents.Select(r => new PersonDto(r));
+        return agents.Select(x => new PersonDto(x)).ToList();
     }
 }

@@ -12,7 +12,6 @@ public class City : Entity<int>
     public string Name { get; set; }
     public int ProvinceId { get; set; }
     public Province Province { get; set; }
-    public ICollection<Person> People { get; set; }
     public ICollection<Transporter> Companies { get; set; }
     public ICollection<Address> Addresses { get; set; }
     public ICollection<CityArea> Areas { get; set; }
