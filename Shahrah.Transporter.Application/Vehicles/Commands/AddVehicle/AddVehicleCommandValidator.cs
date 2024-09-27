@@ -24,15 +24,15 @@ public class AddVehicleCommandValidator : AbstractValidator<AddVehicleCommand>
 
         RuleFor(x => x.Vehicle.OwnerFirstName)
             .NotEmpty()
-            .When(x => x.Vehicle.IsTransporterVehicleOwner);
+            .When(x => !x.Vehicle.IsTransporterVehicleOwner);
 
         RuleFor(x => x.Vehicle.OwnerLastName)
             .NotEmpty()
-            .When(x => x.Vehicle.IsTransporterVehicleOwner);
+            .When(x => !x.Vehicle.IsTransporterVehicleOwner);
 
         RuleFor(x => x.Vehicle.OwnerNationalCode)
             .Must(NationalCodeValidator.IsValid)
             .WithMessage(ErrorMessageResource.NationalCodeFormatNotCorrect)
-            .When(x => x.Vehicle.IsTransporterVehicleOwner);
+            .When(x => !x.Vehicle.IsTransporterVehicleOwner);
     }
 }

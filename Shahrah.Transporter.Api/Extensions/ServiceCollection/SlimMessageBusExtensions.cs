@@ -89,9 +89,9 @@ namespace Shahrah.Transporter.Api.Extensions.ServiceCollection
                         .UseOutbox()
                         .UseTransactionScope();
                 })
-                .WithSerializer<JsonMessageSerializer>();
-
-                mbb.WithProviderHybrid();
+                .WithSerializer<JsonMessageSerializer>()
+                .AddJsonSerializer()
+                .WithProviderHybrid();
             });
 
             //services.AddMessageBusOutboxUsingDbContext<ApplicationDbContext>(opts =>

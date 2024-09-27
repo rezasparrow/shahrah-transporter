@@ -9,7 +9,7 @@ public class Order : Entity<int>
 {
     public float Weight { get; set; }
     public decimal Value { get; set; }
-    public string Description { get; set; }
+    public string? Description { get; set; }
     public bool IsWeighStationRequire { get; set; }
     public decimal MinimumOfferPrice { get; set; }
     public decimal MaximumOfferPrice { get; set; }
@@ -38,8 +38,8 @@ public class Order : Entity<int>
     public ICollection<OrderOptionItem> OrderOptionItems { get; set; }
     public ICollection<OrderItem> OrderItems { get; set; }
     public int? SenderRequestId { get; set; }
-    public string SenderName { get; set; }
-    public string SenderMobileNumber { get; set; }
+    public string? SenderName { get; set; }
+    public string? SenderMobileNumber { get; set; }
     public long? SenderUserId { get; set; }
     public ICollection<PersonOrder> Receivers { get; set; }
     public DateTime? SearchOrPendingOrPricingDeadlineExpiredTime { get; set; }

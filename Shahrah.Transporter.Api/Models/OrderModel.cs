@@ -10,15 +10,15 @@ public class OrderModel
 {
     [Display(Name = "SourceAddress", ResourceType = typeof(DisplayNameResource))]
     [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(ErrorMessageResource))]
-    public AddressLightModel SourceAddress { get; set; }
+    public required AddressLightModel SourceAddress { get; set; }
 
     [Display(Name = "DestinationAddress", ResourceType = typeof(DisplayNameResource))]
     [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(ErrorMessageResource))]
-    public AddressLightModel DestinationAddress { get; set; }
+    public required AddressLightModel DestinationAddress { get; set; }
 
     public int LoadId { get; set; }
 
-    public string LoadDescription { get; set; }
+    public string? LoadDescription { get; set; }
 
     [Display(Name = "LoadingDate", ResourceType = typeof(DisplayNameResource))]
     [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(ErrorMessageResource))]
@@ -26,7 +26,7 @@ public class OrderModel
 
     public int PackageId { get; set; }
 
-    public string packingTypeDescription { get; set; }
+    public string? packingTypeDescription { get; set; }
 
     [Display(Name = "Weight", ResourceType = typeof(DisplayNameResource))]
     [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(ErrorMessageResource))]
@@ -36,13 +36,13 @@ public class OrderModel
     [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(ErrorMessageResource))]
     public long Value { get; set; }
 
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
     [Display(Name = "TruckType", ResourceType = typeof(DisplayNameResource))]
     [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(ErrorMessageResource))]
     public int TruckId { get; set; }
 
-    public List<int> VehicleOptionItems { get; set; }
+    public List<int> VehicleOptionItems { get; set; } = [];
 
     public bool IsWeighStationrequire { get; set; }
 

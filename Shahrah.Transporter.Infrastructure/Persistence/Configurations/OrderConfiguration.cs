@@ -25,7 +25,9 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.Property(p => p.Status).IsRequired();
         builder.Property(p => p.SenderRequestId);
         builder.Property(p => p.SenderName);
-        builder.Property(p => p.SenderMobileNumber);
+        builder
+            .Property(p => p.SenderMobileNumber)
+            .IsRequired(false);
 
         builder.HasOne(p => p.Package).WithMany(x => x.Orders).HasForeignKey(x => x.PackageId);
         builder.HasOne(p => p.Load).WithMany(x => x.Orders).HasForeignKey(x => x.LoadId);

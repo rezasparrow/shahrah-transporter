@@ -17,7 +17,8 @@ public class GetDriversQueryHandler : MediatR.IRequestHandler<GetDriversQuery, F
 
     public async Task<Framework.Models.Driver> Handle(GetDriversQuery request, CancellationToken cancellationToken)
     {
-        var response = await _bus.Send<FindDriverResponse, FindDriverRequest>(new FindDriverRequest(request.NationalCode), cancellationToken: cancellationToken);
+        FindDriverRequest driverRequest = new FindDriverRequest(request.NationalCode);
+        var response = await _bus.Send<FindDriverResponse, FindDriverRequest>(driverRequest, cancellationToken: cancellationToken);
         return response.Driver;
     }
 }

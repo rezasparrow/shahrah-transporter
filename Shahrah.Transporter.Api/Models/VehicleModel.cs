@@ -43,13 +43,13 @@ public class VehicleModel
 
     [Display(Name = "OwnerFirstName", ResourceType = typeof(DisplayNameResource))]
     [StringLength(64, ErrorMessageResourceName = "MaxLengthError", ErrorMessageResourceType = typeof(ErrorMessageResource))]
-    public string OwnerFirstName { get; set; }
+    public string? OwnerFirstName { get; set; }
 
     [Display(Name = "OwnerLastName", ResourceType = typeof(DisplayNameResource))]
     [StringLength(128, ErrorMessageResourceName = "MaxLengthError", ErrorMessageResourceType = typeof(ErrorMessageResource))]
-    public string OwnerLastName { get; set; }
+    public string? OwnerLastName { get; set; }
 
     [Display(Name = "OwnerNationalCode", ResourceType = typeof(DisplayNameResource))]
     [StringLength(11, ErrorMessageResourceName = "MaxLengthError", ErrorMessageResourceType = typeof(ErrorMessageResource))]
-    public string OwnerNationalCode { get; set; }
+    public string? OwnerNationalCode { get; set; }
 }
