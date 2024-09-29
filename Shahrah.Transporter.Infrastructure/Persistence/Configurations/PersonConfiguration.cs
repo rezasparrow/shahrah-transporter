@@ -19,7 +19,9 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
         builder.Property(p => p.MobileNumber).HasColumnType("varchar(11)").IsRequired();
         builder.Property(x => x.Status).IsRequired().HasDefaultValue(PersonStatus.Active);
         builder.Property(x => x.AgentRegistrationStatus).IsRequired().HasDefaultValue(AgentRegistrationStatus.None);
-        builder.Property(p => p.LicenseSerialNumber);
+        builder
+            .Property(p => p.LicenseSerialNumber)
+            .IsRequired(false);
 
         builder.HasIndex(p => p.NationalCode).HasFilter("[IsDeleted]=(0) AND [AgentRegistrationStatus]<>(20)").IsUnique();
         builder.HasIndex(p => p.MobileNumber).HasFilter("[IsDeleted]=(0) AND [AgentRegistrationStatus]<>(20)").IsUnique();

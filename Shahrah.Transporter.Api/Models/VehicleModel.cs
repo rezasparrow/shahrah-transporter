@@ -35,7 +35,7 @@ public class VehicleModel
     [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(ErrorMessageResource))]
     public float GrossLoadingCapacity { get; set; }
 
-    public List<int> VehicleOptionItems { get; set; }
+    public List<int> VehicleOptionItems { get; set; } = [];
 
     [Display(Name = "VehicleOwner", ResourceType = typeof(DisplayNameResource))]
     [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(ErrorMessageResource))]

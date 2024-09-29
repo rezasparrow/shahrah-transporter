@@ -15,7 +15,10 @@ namespace Shahrah.Transporter.Infrastructure.Persistence.Configurations
             builder.Property(p => p.DriverNationalCode).HasColumnType("varchar(10)");
             builder.Property(p => p.VehicleSmartCardNumber).HasColumnType("nvarchar(25)");
             builder.Property(p => p.WaybillCode).HasColumnType("varchar(17)");
-            builder.Property(p => p.CorrelationId).HasDefaultValue(Guid.NewGuid());
+            builder
+                .Property(p => p.CorrelationId)
+                .HasDefaultValue(Guid.NewGuid());
+
 
             builder.HasOne(x => x.Order).WithMany(x => x.OrderItems).HasForeignKey(x => x.OrderId);
         }
