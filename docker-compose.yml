@@ -4,6 +4,9 @@ services:
     build:
       context: ..
       dockerfile: shahrah-transporter/Shahrah.Transporter.Api/Dockerfile
+    environment:
+     - ConnectionStrings__Default=Server=host.docker.internal;Database=shahrah-transporter-dev;User Id=datarw;Password=1qaz@WSX;Trust Server Certificate=true;Encrypt=True;
+     - AppSettings__IdentityServer__Authority=http://shahrah.keyclock:8080/realms/shahrah
 
 
 networks:
