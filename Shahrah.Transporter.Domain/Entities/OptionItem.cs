@@ -1,14 +1,9 @@
 using Shahrah.Framework.Models;
-using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Domain.Entities;
 
-public class OptionItem : Entity<int>
+public class OptionItem(int id) : Entity<int>(id)
 {
-    public OptionItem(int id) : base(id)
-    {
-    }
-
     public string Value { get; set; }
     public int OptionId { get; set; }
     public Option Option { get; set; }

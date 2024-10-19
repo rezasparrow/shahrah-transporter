@@ -1,5 +1,3 @@
-using System;
-
 namespace Shahrah.Transporter.Application.OrderItems.Models;
 
 public class PaidOrderItemDto : OrderItemDto

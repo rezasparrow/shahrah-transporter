@@ -5,20 +5,12 @@ using Shahrah.Framework.Resources;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
 using Shahrah.Transporter.Domain.Enums;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Transporters.Commands.RegisterTransporter;
 
-internal class RegisterTransporterCommandHandler : IRequestHandler<RegisterTransporterCommand, Unit>
+internal class RegisterTransporterCommandHandler(IApplicationDbContext dbContext) : IRequestHandler<RegisterTransporterCommand, Unit>
 {
-    private readonly IApplicationDbContext _dbContext;
-
-    public RegisterTransporterCommandHandler(IApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task<Unit> Handle(RegisterTransporterCommand request, CancellationToken cancellationToken)
     {
@@ -42,8 +34,8 @@ internal class RegisterTransporterCommandHandler : IRequestHandler<RegisterTrans
             ActivityZone = request.Transporter.TransporterActivityZone,
             Latitude = request.Transporter.Latitude,
             Longitude = request.Transporter.Longitude,
-            People = new List<Person>
-            {
+            People =
+            [
                 new Person
                 {
                     Id = request.Person.Id,
@@ -54,7 +46,7 @@ internal class RegisterTransporterCommandHandler : IRequestHandler<RegisterTrans
                     MobileNumber = request.Person.MobileNumber,
                     PersonType = PersonTypeEnum.Owner
                 }
-            }
+            ]
         };
 
         await _dbContext.Transporters.AddAsync(transporterEntity, cancellationToken);

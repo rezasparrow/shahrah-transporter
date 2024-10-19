@@ -1,6 +1,3 @@
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shahrah.Framework.Exceptions;
@@ -12,14 +9,9 @@ using Shahrah.Transporter.Domain.Enums;
 
 namespace Shahrah.Transporter.Application.Vehicles.Queries.GetVehicle;
 
-public class GetVehicleQueryHandler : IRequestHandler<GetVehicleQuery, VehicleForEditDto>
+public class GetVehicleQueryHandler(IApplicationDbContext dbContext) : IRequestHandler<GetVehicleQuery, VehicleForEditDto>
 {
-    private readonly IApplicationDbContext _dbContext;
-
-    public GetVehicleQueryHandler(IApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task<VehicleForEditDto> Handle(GetVehicleQuery request, CancellationToken cancellationToken)
     {

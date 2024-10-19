@@ -6,14 +6,8 @@ namespace Shahrah.Transporter.Application.OrderItems.Commands.OrderItemTechnical
 /// <summary>
 /// تائید فنی توسط تی سی
 /// </summary>
-public class OrderItemTechnicalyConfirmedCommand : IRequest, ITransactionalCommand
+public class OrderItemTechnicalyConfirmedCommand(int orderItemId, long personId) : IRequest, ITransactionalCommand
 {
-    public int OrderItemId { get; }
-    public long PersonId { get; }
-
-    public OrderItemTechnicalyConfirmedCommand(int orderItemId, long personId)
-    {
-        OrderItemId = orderItemId;
-        PersonId = personId;
-    }
+    public int OrderItemId { get; } = orderItemId;
+    public long PersonId { get; } = personId;
 }

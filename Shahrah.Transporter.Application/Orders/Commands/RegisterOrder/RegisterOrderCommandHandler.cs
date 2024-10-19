@@ -1,18 +1,11 @@
 ﻿using MediatR;
 using Shahrah.Transporter.Application.Orders.Services.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.Commands.RegisterOrder;
 
-internal class RegisterOrderCommandHandler : IRequestHandler<RegisterOrderCommand, Unit>
+internal class RegisterOrderCommandHandler(IOrderService orderService) : IRequestHandler<RegisterOrderCommand, Unit>
 {
-    private readonly IOrderService _orderService;
-
-    public RegisterOrderCommandHandler(IOrderService orderService)
-    {
-        _orderService = orderService;
-    }
+    private readonly IOrderService _orderService = orderService;
 
     public async Task<Unit> Handle(RegisterOrderCommand request, CancellationToken cancellationToken)
     {

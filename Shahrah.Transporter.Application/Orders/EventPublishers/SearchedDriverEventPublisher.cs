@@ -2,25 +2,18 @@
 using Shahrah.Framework.Models;
 using Shahrah.Transporter.Domain.Entities;
 using SlimMessageBus;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using OrderOptionItem = Shahrah.Framework.Models.OrderOptionItem;
 
 namespace Shahrah.Transporter.Application.Orders.EventPublishers;
 
-public class SearchedDriverEventPublisher
+public class SearchedDriverEventPublisher(IMessageBus messageBus)
 {
-    private readonly IMessageBus _messageBus;
-
-    public SearchedDriverEventPublisher(IMessageBus messageBus)
-    {
-        _messageBus = messageBus;
-    }
+    private readonly IMessageBus _messageBus = messageBus;
 
     public async Task Publish(Order order)
     {
-        var searchedDriverEvent = new SearchedDriverEvent(order.CorrelationId, (int)(order.SearchOrPendingOrPricingDeadlineExpiredTime.Value - DateTime.Now).TotalSeconds)
+        var maxTimeToResponseBySecond = (int)(order.SearchOrPendingOrPricingDeadlineExpiredTime!.Value - DateTime.Now).TotalSeconds;
+        var searchedDriverEvent = new SearchedDriverEvent(order.CorrelationId, maxTimeToResponseBySecond)
         {
             Id = order.Id,
             TransporterPerson = new TransporterPerson

@@ -3,14 +3,8 @@ using Shahrah.Transporter.Application.Common.Interfaces;
 
 namespace Shahrah.Transporter.Application.Orders.Commands.HideOrder;
 
-public class HideOrderCommand : IRequest<Unit>, ITransactionalCommand
+public class HideOrderCommand(int orderId, long personId) : IRequest<Unit>, ITransactionalCommand
 {
-    public HideOrderCommand(int orderId, long personId)
-    {
-        OrderId = orderId;
-        PersonId = personId;
-    }
-
-    public int OrderId { get; }
-    public long PersonId { get; }
+    public int OrderId { get; } = orderId;
+    public long PersonId { get; } = personId;
 }

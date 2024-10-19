@@ -3,21 +3,13 @@ using Shahrah.Framework.Events;
 using Shahrah.Framework.Models;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using SlimMessageBus;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.EventPublishers;
 
-public class WinnerTransporterSpecifiedEventPublisher
+public class WinnerTransporterSpecifiedEventPublisher(IMessageBus messageBus, IApplicationDbContext dbContext)
 {
-    private readonly IMessageBus _messageBus;
-    private readonly IApplicationDbContext _dbContext;
-
-    public WinnerTransporterSpecifiedEventPublisher(IMessageBus messageBus, IApplicationDbContext dbContext)
-    {
-        _messageBus = messageBus;
-        _dbContext = dbContext;
-    }
+    private readonly IMessageBus _messageBus = messageBus;
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task Publish(int orderId)
     {

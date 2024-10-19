@@ -1,6 +1,5 @@
 using Shahrah.Framework.Extensions;
 using Shahrah.Framework.Scheduling;
-using SlimMessageBus;
 using System.Reflection;
 
 IConfiguration Configuration = null!;

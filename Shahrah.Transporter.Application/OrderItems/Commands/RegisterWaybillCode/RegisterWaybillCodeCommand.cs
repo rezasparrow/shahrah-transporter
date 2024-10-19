@@ -6,16 +6,9 @@ namespace Shahrah.Transporter.Application.OrderItems.Commands.RegisterWaybillCod
 /// <summary>
 /// ثبت کد 17 رقمی بارنامه
 /// </summary>
-public class RegisterWaybillCodeCommand : IRequest, ITransactionalCommand
+public class RegisterWaybillCodeCommand(int orderItemId, string waybillCode, long personId) : IRequest, ITransactionalCommand
 {
-    public int OrderItemId { get; }
-    public long PersonId { get; }
-    public string WaybillCode { get; }
-
-    public RegisterWaybillCodeCommand(int orderItemId, string waybillCode, long personId)
-    {
-        OrderItemId = orderItemId;
-        WaybillCode = waybillCode;
-        PersonId = personId;
-    }
+    public int OrderItemId { get; } = orderItemId;
+    public long PersonId { get; } = personId;
+    public string WaybillCode { get; } = waybillCode;
 }

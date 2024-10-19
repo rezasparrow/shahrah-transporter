@@ -9,22 +9,14 @@ using Shahrah.Transporter.Application.Drivers.Queries.GetDrivers;
 using Shahrah.Transporter.Application.Transporters.Queries.GetTransporter;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class DriversController : BaseController
+public class DriversController(IMediator mediator, ICurrentUserService currentUserService, ISmsService smsService) : BaseController
 {
-    private readonly IMediator _mediator;
-    private readonly ICurrentUserService _currentUserService;
-    private readonly ISmsService _smsService;
-
-    public DriversController(IMediator mediator, ICurrentUserService currentUserService, ISmsService smsService)
-    {
-        _mediator = mediator;
-        _currentUserService = currentUserService;
-        _smsService = smsService;
-    }
+    private readonly IMediator _mediator = mediator;
+    private readonly ICurrentUserService _currentUserService = currentUserService;
+    private readonly ISmsService _smsService = smsService;
 
     [HttpGet("{nationalCode}")]
     [ProducesResponseType(typeof(Driver), (int)HttpStatusCode.OK)]

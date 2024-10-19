@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shahrah.Transporter.Domain.Entities;
-using System;
 
 namespace Shahrah.Transporter.Infrastructure.Persistence.Configurations
 {

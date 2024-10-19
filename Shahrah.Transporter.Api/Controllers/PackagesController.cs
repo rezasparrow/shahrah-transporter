@@ -2,20 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Shahrah.Transporter.Application.Lookups.Models;
 using Shahrah.Transporter.Application.Lookups.Queries.GetPackages;
-using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class PackagesController : BaseController
+public class PackagesController(IMediator mediator) : BaseController
 {
-    private readonly IMediator _mediator;
-
-    public PackagesController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    private readonly IMediator _mediator = mediator;
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<PackageDto>), (int)HttpStatusCode.OK)]

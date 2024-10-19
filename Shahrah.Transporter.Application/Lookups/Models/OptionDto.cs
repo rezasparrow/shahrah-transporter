@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Shahrah.Transporter.Application.Lookups.Models;
+﻿namespace Shahrah.Transporter.Application.Lookups.Models;
 
 public class OptionDto
 {

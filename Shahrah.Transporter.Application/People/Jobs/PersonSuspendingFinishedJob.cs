@@ -1,21 +1,13 @@
 ﻿using Shahrah.Framework.Scheduling;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.People.Services.Interfaces;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.People.Jobs;
 
-public class PersonSuspendingFinishedJob : DelayedJob
+public class PersonSuspendingFinishedJob(IPersonService personService, IApplicationDbContext dbContext) : DelayedJob
 {
-    private readonly IPersonService _personService;
-    private readonly IApplicationDbContext _dbContext;
-
-    public PersonSuspendingFinishedJob(IPersonService personService, IApplicationDbContext dbContext)
-    {
-        _personService = personService;
-        _dbContext = dbContext;
-    }
+    private readonly IPersonService _personService = personService;
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public override async Task RunAsync(Dictionary<string, string> data)
     {

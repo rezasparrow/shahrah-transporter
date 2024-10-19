@@ -1,18 +1,11 @@
 ﻿using MediatR;
 using Shahrah.Transporter.Application.OrderItems.Services.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.OrderItems.Commands.RegisterWaybillCode;
 
-public class RegisterWaybillCodeCommandHandler : IRequestHandler<RegisterWaybillCodeCommand>
+public class RegisterWaybillCodeCommandHandler(IOrderItemService orderItemService) : IRequestHandler<RegisterWaybillCodeCommand>
 {
-    private readonly IOrderItemService _orderItemService;
-
-    public RegisterWaybillCodeCommandHandler(IOrderItemService orderItemService)
-    {
-        _orderItemService = orderItemService;
-    }
+    private readonly IOrderItemService _orderItemService = orderItemService;
 
     public async Task Handle(RegisterWaybillCodeCommand request, CancellationToken cancellationToken)
     {

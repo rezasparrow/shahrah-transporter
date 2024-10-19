@@ -1,18 +1,11 @@
 ﻿using MediatR;
 using Shahrah.Transporter.Application.People.Services.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.People.Commands.AgentAccept;
 
-public class AgentAcceptCommandHandler : IRequestHandler<AgentAcceptCommand, Unit>
+public class AgentAcceptCommandHandler(IPersonService personService) : IRequestHandler<AgentAcceptCommand, Unit>
 {
-    private readonly IPersonService _personService;
-
-    public AgentAcceptCommandHandler(IPersonService personService)
-    {
-        _personService = personService;
-    }
+    private readonly IPersonService _personService = personService;
 
     public async Task<Unit> Handle(AgentAcceptCommand request, CancellationToken cancellationToken)
     {

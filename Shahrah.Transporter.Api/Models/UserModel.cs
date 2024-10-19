@@ -1,5 +1,4 @@
 ﻿using Shahrah.Transporter.Domain.Enums;
-using System;
 
 namespace Shahrah.Transporter.Api.Models;
 

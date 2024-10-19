@@ -1,0 +1,8 @@
+services:
+  shahrah.transporter:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=7000
+      - AppSettings__Authority=http://host.docker.internal:8080/realms/shahrah
+    ports:
+      - 7000:7000

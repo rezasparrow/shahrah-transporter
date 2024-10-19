@@ -18,37 +18,20 @@ using Shahrah.Transporter.Application.People.Services.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
 using Shahrah.Transporter.Domain.Enums;
 using SlimMessageBus;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.OrderItems.Services
 {
-    public class OrderItemPaymentService : IOrderItemPaymentService
+    public class OrderItemPaymentService(IOnlinePayment onlinePayment, AppSettings appSettings, IJobScheduler jobScheduler, IApplicationDbContext dbContext, IMessageBus messageBus, IFinancialTransactionService financialTransactionService, IPersonService personService, OrderItemPaidEventPublisher orderItemPaidEventPublisher) : IOrderItemPaymentService
     {
-        private readonly IOnlinePayment _onlinePayment;
-        private readonly AppSettings _appSettings;
-        private readonly IJobScheduler _jobScheduler;
-        private readonly IApplicationDbContext _dbContext;
-        private readonly IMessageBus _messageBus;
+        private readonly IOnlinePayment _onlinePayment = onlinePayment;
+        private readonly AppSettings _appSettings = appSettings;
+        private readonly IJobScheduler _jobScheduler = jobScheduler;
+        private readonly IApplicationDbContext _dbContext = dbContext;
+        private readonly IMessageBus _messageBus = messageBus;
         private readonly INotificationService _notificationService;
-        private readonly IFinancialTransactionService _financialTransactionService;
-        private readonly IPersonService _personService;
-        private readonly OrderItemPaidEventPublisher _orderItemPaidEventPublisher;
-
-        public OrderItemPaymentService(IOnlinePayment onlinePayment, AppSettings appSettings, IJobScheduler jobScheduler, IApplicationDbContext dbContext, IMessageBus messageBus, IFinancialTransactionService financialTransactionService, IPersonService personService, OrderItemPaidEventPublisher orderItemPaidEventPublisher)
-        {
-            _onlinePayment = onlinePayment;
-            _appSettings = appSettings;
-            _jobScheduler = jobScheduler;
-            _dbContext = dbContext;
-            _messageBus = messageBus;
-            _financialTransactionService = financialTransactionService;
-            _personService = personService;
-            _orderItemPaidEventPublisher = orderItemPaidEventPublisher;
-        }
+        private readonly IFinancialTransactionService _financialTransactionService = financialTransactionService;
+        private readonly IPersonService _personService = personService;
+        private readonly OrderItemPaidEventPublisher _orderItemPaidEventPublisher = orderItemPaidEventPublisher;
 
         public async Task<IPaymentRequestResult> Pay(IList<int> orderItemsId, GatewayType gateway, CancellationToken cancellationToken = default)
         {

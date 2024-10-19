@@ -3,12 +3,7 @@ using Shahrah.Transporter.Application.Transporters.Models;
 
 namespace Shahrah.Transporter.Application.Transporters.Queries.GetTransporter;
 
-public class GetTransporterQuery : IRequest<TransporterDto>
+public class GetTransporterQuery(long personId) : IRequest<TransporterDto>
 {
-    public GetTransporterQuery(long personId)
-    {
-        PersonId = personId;
-    }
-
-    public long PersonId { get; }
+    public long PersonId { get; } = personId;
 }

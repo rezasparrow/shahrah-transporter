@@ -6,20 +6,11 @@ namespace Shahrah.Transporter.Application.Orders.Commands.FindDriver;
 /// <summary>
 /// جستجوی راننده
 /// </summary>
-public class FindDriverCommand : IRequest<Unit>, ITransactionalCommand
+public class FindDriverCommand(long personId, int orderId, decimal minimumPrice, decimal maximumPrice, int vehicleRequestedCount) : IRequest<Unit>, ITransactionalCommand
 {
-    public FindDriverCommand(long personId, int orderId, decimal minimumPrice, decimal maximumPrice, int vehicleRequestedCount)
-    {
-        PersonId = personId;
-        OrderId = orderId;
-        MinimumPrice = minimumPrice;
-        MaximumPrice = maximumPrice;
-        VehicleRequestedCount = vehicleRequestedCount;
-    }
-
-    public long PersonId { get; set; }
-    public int OrderId { get; set; }
-    public decimal MinimumPrice { get; set; }
-    public decimal MaximumPrice { get; set; }
-    public int VehicleRequestedCount { get; set; }
+    public long PersonId { get; set; } = personId;
+    public int OrderId { get; set; } = orderId;
+    public decimal MinimumPrice { get; set; } = minimumPrice;
+    public decimal MaximumPrice { get; set; } = maximumPrice;
+    public int VehicleRequestedCount { get; set; } = vehicleRequestedCount;
 }

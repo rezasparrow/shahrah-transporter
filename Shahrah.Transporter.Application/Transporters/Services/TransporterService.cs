@@ -4,20 +4,12 @@ using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.Transporters.Services.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
 using Shahrah.Transporter.Domain.Enums;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Transporters.Services;
 
-public class TransporterService : ITransporterService
+public class TransporterService(IApplicationDbContext dbContext) : ITransporterService
 {
-    private readonly IApplicationDbContext _dbContext;
-
-    public TransporterService(IApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task<IEnumerable<Person>> GetActivePersonsByTransportersLatLong(double x, double y)
     {

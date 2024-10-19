@@ -1,33 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Shahrah.Framework.Events;
 using Shahrah.Framework.Scheduling;
 using Shahrah.Framework.Services;
 using Shahrah.Transporter.Application.Drivers.EventHandlers;
 using SlimMessageBus;
-using System;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 
 namespace Shahrah.Transporter.Api.Controllers
 {
-    public class TestController : Controller
+    public class TestController(
+        INotificationService notificationService,
+        IMessageBus bus,
+        IJobScheduler jobScheduler) : Controller
     {
-        private readonly INotificationService _notificationService;
-        private readonly IMessageBus _bus;
-        private readonly IJobScheduler _jobScheduler;
-
-        public TestController(
-            INotificationService notificationService,
-            IMessageBus bus,
-            IJobScheduler jobScheduler)
-        {
-            _notificationService = notificationService;
-            _bus = bus;
-            _jobScheduler = jobScheduler;
-        }
+        private readonly INotificationService _notificationService = notificationService;
+        private readonly IMessageBus _bus = bus;
+        private readonly IJobScheduler _jobScheduler = jobScheduler;
 
         [HttpPost("pushToTc")]
         [AllowAnonymous]

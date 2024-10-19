@@ -1,0 +1,12 @@
+services:
+  shahrah.transporter:
+    image: ${DOCKER_REGISTRY-}shahrahtransporterapi
+    build:
+      context: ..
+      dockerfile: shahrah-transporter/Shahrah.Transporter.Api/Dockerfile
+
+
+networks:
+  default:
+    name: shahrah-network
+    external: true

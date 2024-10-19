@@ -15,41 +15,23 @@ using Shahrah.Transporter.Application.People.Services.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
 using Shahrah.Transporter.Domain.Enums;
 using SlimMessageBus;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using OrderItemStatus = Shahrah.Transporter.Domain.Enums.OrderItemStatus;
 
 namespace Shahrah.Transporter.Application.OrderItems.Services;
 
-public class AuctionService : IAuctionService
+public class AuctionService(IApplicationDbContext dbContext, OrderItemChangeStateEventPublisher orderItemChangeStateEventPublisher, INotificationService notificationService, IJobScheduler jobScheduler, OrderItemCreatedEventPublisher orderItemCreatedEventPublisher, IMessageBus messageBus, AppSettings appSettings, ICloseOrderService closeOrderService, IPersonService personService, OrderItemPaidEventPublisher orderItemPaidEventPublisher) : IAuctionService
 {
-    private readonly IApplicationDbContext _dbContext;
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
-    private readonly OrderItemChangeStateEventPublisher _orderItemChangeStateEventPublisher;
-    private readonly INotificationService _notificationService;
-    private readonly IJobScheduler _jobScheduler;
-    private readonly OrderItemCreatedEventPublisher _orderItemCreatedEventPublisher;
-    private readonly IMessageBus _messageBus;
-    private readonly AppSettings _appSettings;
-    private readonly ICloseOrderService _closeOrderService;
-    private readonly IPersonService _personService;
-    private readonly OrderItemPaidEventPublisher _orderItemPaidEventPublisher;
-
-    public AuctionService(IApplicationDbContext dbContext, OrderItemChangeStateEventPublisher orderItemChangeStateEventPublisher, INotificationService notificationService, IJobScheduler jobScheduler, OrderItemCreatedEventPublisher orderItemCreatedEventPublisher, IMessageBus messageBus, AppSettings appSettings, ICloseOrderService closeOrderService, IPersonService personService, OrderItemPaidEventPublisher orderItemPaidEventPublisher)
-    {
-        _dbContext = dbContext;
-        _orderItemChangeStateEventPublisher = orderItemChangeStateEventPublisher;
-        _notificationService = notificationService;
-        _jobScheduler = jobScheduler;
-        _orderItemCreatedEventPublisher = orderItemCreatedEventPublisher;
-        _messageBus = messageBus;
-        _appSettings = appSettings;
-        _closeOrderService = closeOrderService;
-        _personService = personService;
-        _orderItemPaidEventPublisher = orderItemPaidEventPublisher;
-    }
+    private readonly OrderItemChangeStateEventPublisher _orderItemChangeStateEventPublisher = orderItemChangeStateEventPublisher;
+    private readonly INotificationService _notificationService = notificationService;
+    private readonly IJobScheduler _jobScheduler = jobScheduler;
+    private readonly OrderItemCreatedEventPublisher _orderItemCreatedEventPublisher = orderItemCreatedEventPublisher;
+    private readonly IMessageBus _messageBus = messageBus;
+    private readonly AppSettings _appSettings = appSettings;
+    private readonly ICloseOrderService _closeOrderService = closeOrderService;
+    private readonly IPersonService _personService = personService;
+    private readonly OrderItemPaidEventPublisher _orderItemPaidEventPublisher = orderItemPaidEventPublisher;
 
     public async Task AuctionClosed(AuctionClosedEvent message)
     {
@@ -120,7 +102,7 @@ public class AuctionService : IAuctionService
     {
         order.Status = OrderStatus.InProgress;
         order.SearchOrPendingOrPricingDeadlineExpiredTime = null;
-        order.OrderItems ??= new List<OrderItem>();
+        order.OrderItems ??= [];
         order.OrderItems.AddRange(Enumerable.Repeat(0, order.VehicleQuantityInSearch).Select(_ => new OrderItem
         {
             OrderId = order.Id,
@@ -144,7 +126,7 @@ public class AuctionService : IAuctionService
     {
         order.Status = OrderStatus.InProgress;
         order.SearchOrPendingOrPricingDeadlineExpiredTime = null;
-        order.OrderItems ??= new List<OrderItem>();
+        order.OrderItems ??= [];
         order.OrderItems.AddRange(Enumerable.Repeat(0, order.VehicleQuantityInSearch).Select(_ => new OrderItem
         {
             OrderId = order.Id,
@@ -178,7 +160,7 @@ public class AuctionService : IAuctionService
     {
         order.Status = OrderStatus.InProgress;
         order.SearchOrPendingOrPricingDeadlineExpiredTime = null;
-        order.OrderItems ??= new List<OrderItem>();
+        order.OrderItems ??= [];
 
         var remainderItem = order.VehicleQuantityInSearch - winningBids.Count;
         if (remainderItem > 0)

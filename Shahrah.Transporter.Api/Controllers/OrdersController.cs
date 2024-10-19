@@ -21,23 +21,14 @@ using Shahrah.Transporter.Application.Orders.Models;
 using Shahrah.Transporter.Application.Orders.Queries.GetOrder;
 using Shahrah.Transporter.Application.Orders.Queries.GetOrders;
 using Shahrah.Transporter.Application.Orders.Queries.GetOrderSenderInfo;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class OrdersController : BaseController
+public class OrdersController(IMediator mediator, ICurrentUserService currentUserService) : BaseController
 {
-    private readonly IMediator _mediator;
-    private readonly ICurrentUserService _currentUserService;
-
-    public OrdersController(IMediator mediator, ICurrentUserService currentUserService)
-    {
-        _mediator = mediator;
-        _currentUserService = currentUserService;
-    }
+    private readonly IMediator _mediator = mediator;
+    private readonly ICurrentUserService _currentUserService = currentUserService;
 
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.OK)]

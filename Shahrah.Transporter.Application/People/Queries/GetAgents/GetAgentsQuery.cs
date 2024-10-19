@@ -1,15 +1,9 @@
 ﻿using MediatR;
 using Shahrah.Transporter.Application.People.Models;
-using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Application.People.Queries.GetAgents;
 
-public class GetAgentsQuery : IRequest<List<PersonDto>>
+public class GetAgentsQuery(long personId) : IRequest<List<PersonDto>>
 {
-    public long PersonId { get; }
-
-    public GetAgentsQuery(long personId)
-    {
-        PersonId = personId;
-    }
+    public long PersonId { get; } = personId;
 }

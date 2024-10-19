@@ -11,31 +11,17 @@ using Shahrah.Transporter.Application.People.Services.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
 using Shahrah.Transporter.Domain.Enums;
 using SlimMessageBus;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.Services;
 
-public class OrderPricingService : IOrderPricingService
+public class OrderPricingService(IApplicationDbContext dbContext, IMessageBus messageBus, IPersonService personService, INotificationService notificationService, ICloseOrderService closeOrderService, WinnerTransporterSpecifiedEventPublisher winnerTransporterSpecifiedEventPublisher) : IOrderPricingService
 {
-    private readonly IApplicationDbContext _dbContext;
-    private readonly IMessageBus _messageBus;
-    private readonly IPersonService _personService;
-    private readonly INotificationService _notificationService;
-    private readonly ICloseOrderService _closeOrderService;
-    private readonly WinnerTransporterSpecifiedEventPublisher _winnerTransporterSpecifiedEventPublisher;
-
-    public OrderPricingService(IApplicationDbContext dbContext, IMessageBus messageBus, IPersonService personService, INotificationService notificationService, ICloseOrderService closeOrderService, WinnerTransporterSpecifiedEventPublisher winnerTransporterSpecifiedEventPublisher)
-    {
-        _dbContext = dbContext;
-        _messageBus = messageBus;
-        _personService = personService;
-        _notificationService = notificationService;
-        _closeOrderService = closeOrderService;
-        _winnerTransporterSpecifiedEventPublisher = winnerTransporterSpecifiedEventPublisher;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
+    private readonly IMessageBus _messageBus = messageBus;
+    private readonly IPersonService _personService = personService;
+    private readonly INotificationService _notificationService = notificationService;
+    private readonly ICloseOrderService _closeOrderService = closeOrderService;
+    private readonly WinnerTransporterSpecifiedEventPublisher _winnerTransporterSpecifiedEventPublisher = winnerTransporterSpecifiedEventPublisher;
 
     public async Task OrderPricingFinished(int orderId, CancellationToken cancellationToken = default)
     {

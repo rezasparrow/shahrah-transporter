@@ -1,20 +1,13 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.Lookups.Models;
 
 namespace Shahrah.Transporter.Application.Lookups.Queries.GetProvince;
 
-public class GetProvinceQueryHandler : IRequestHandler<GetProvinceQuery, ProvinceDto>
+public class GetProvinceQueryHandler(IApplicationDbContext dbContext) : IRequestHandler<GetProvinceQuery, ProvinceDto>
 {
-    private readonly IApplicationDbContext _dbContext;
-
-    public GetProvinceQueryHandler(IApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task<ProvinceDto> Handle(GetProvinceQuery request, CancellationToken cancellationToken)
     {

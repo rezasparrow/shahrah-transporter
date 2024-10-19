@@ -8,20 +8,13 @@ using Shahrah.Transporter.Application.OrderItems.Commands.EndTrip;
 using Shahrah.Transporter.Application.OrderItems.Commands.OrderItemTechnicalyConfirmed;
 using Shahrah.Transporter.Application.OrderItems.Commands.RegisterWaybillCode;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class OrderItemsController : BaseController
+public class OrderItemsController(IMediator mediator, ICurrentUserService currentUserService) : BaseController
 {
-    private readonly IMediator _mediator;
-    private readonly ICurrentUserService _currentUserService;
-
-    public OrderItemsController(IMediator mediator, ICurrentUserService currentUserService)
-    {
-        _mediator = mediator;
-        _currentUserService = currentUserService;
-    }
+    private readonly IMediator _mediator = mediator;
+    private readonly ICurrentUserService _currentUserService = currentUserService;
 
     [HttpPut("{orderItemId:int}/ConfirmLoading")]
     [ProducesResponseType((int)HttpStatusCode.OK)]

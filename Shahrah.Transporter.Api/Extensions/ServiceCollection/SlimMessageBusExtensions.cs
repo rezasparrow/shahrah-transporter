@@ -1,6 +1,4 @@
 ﻿using Confluent.Kafka;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Shahrah.Framework.Events;
 using Shahrah.Framework.Requests;
 using Shahrah.Framework.Responses;
@@ -13,7 +11,6 @@ using SlimMessageBus.Host.Hybrid;
 using SlimMessageBus.Host.Kafka;
 using SlimMessageBus.Host.Outbox;
 using SlimMessageBus.Host.Serialization.Json;
-using System;
 
 namespace Shahrah.Transporter.Api.Extensions.ServiceCollection
 {

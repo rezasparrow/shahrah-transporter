@@ -1,5 +1,4 @@
 ﻿using Shahrah.Transporter.Domain.Entities;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.Services.Interfaces;
 

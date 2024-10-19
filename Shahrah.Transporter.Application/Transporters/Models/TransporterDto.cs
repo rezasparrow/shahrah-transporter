@@ -1,36 +1,19 @@
 using Shahrah.Transporter.Domain.Enums;
-using System;
 
 namespace Shahrah.Transporter.Application.Transporters.Models;
 
-public class TransporterDto
+public class TransporterDto(Domain.Entities.Transporter item)
 {
-    public TransporterDto(Domain.Entities.Transporter item)
-    {
-        Name = item.Name;
-        NationalId = item.NationalId;
-        LicenseSerialNumber = item.LicenseSerialNumber;
-        LicenseExpirationDate = item.LicenseExpirationDate;
-        Address = item.Address;
-        PostalCode = item.PostalCode;
-        PhoneNumber = item.PhoneNumber;
-        TransporterActivityZone = item.ActivityZone;
-        Latitude = item.Latitude;
-        Longitude = item.Longitude;
-        CityId = item.CityId;
-        ProvinceId = item.City.ProvinceId;
-    }
-
-    public string Name { get; set; }
-    public string NationalId { get; set; }
-    public string LicenseSerialNumber { get; set; }
-    public DateTime LicenseExpirationDate { get; set; }
-    public string Address { get; set; }
-    public string PostalCode { get; set; }
-    public string PhoneNumber { get; set; }
-    public TransporterActivityZoneType TransporterActivityZone { get; set; }
-    public double Latitude { get; set; }
-    public double Longitude { get; set; }
-    public int CityId { get; set; }
-    public int ProvinceId { get; set; }
+    public string Name { get; set; } = item.Name;
+    public string NationalId { get; set; } = item.NationalId;
+    public string LicenseSerialNumber { get; set; } = item.LicenseSerialNumber;
+    public DateTime LicenseExpirationDate { get; set; } = item.LicenseExpirationDate;
+    public string Address { get; set; } = item.Address;
+    public string PostalCode { get; set; } = item.PostalCode;
+    public string PhoneNumber { get; set; } = item.PhoneNumber;
+    public TransporterActivityZoneType TransporterActivityZone { get; set; } = item.ActivityZone;
+    public double Latitude { get; set; } = item.Latitude;
+    public double Longitude { get; set; } = item.Longitude;
+    public int CityId { get; set; } = item.CityId;
+    public int ProvinceId { get; set; } = item.City.ProvinceId;
 }

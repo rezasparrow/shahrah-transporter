@@ -1,6 +1,4 @@
-﻿using Shahrah.Transporter.Domain.Entities;
-using Shahrah.Transporter.Domain.Models.DataTransferObjects;
-using System;
+﻿using Shahrah.Transporter.Domain.Models.DataTransferObjects;
 using Shahrah.Transporter.Domain.Enums;
 using Shahrah.Transporter.Application.Drivers.Models;
 

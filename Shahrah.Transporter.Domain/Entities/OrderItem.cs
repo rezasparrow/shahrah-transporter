@@ -1,5 +1,4 @@
 using Shahrah.Framework.Models;
-using System;
 using OrderItemStatus = Shahrah.Transporter.Domain.Enums.OrderItemStatus;
 
 namespace Shahrah.Transporter.Domain.Entities;

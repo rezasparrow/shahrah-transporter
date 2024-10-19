@@ -1,18 +1,11 @@
 ﻿using MediatR;
 using Shahrah.Transporter.Application.OrderItems.Services.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.OrderItems.Commands.OrderItemTechnicalyConfirmed;
 
-public class OrderItemTechnicalyConfirmedCommandHandler : IRequestHandler<OrderItemTechnicalyConfirmedCommand>
+public class OrderItemTechnicalyConfirmedCommandHandler(IOrderItemService orderItemService) : IRequestHandler<OrderItemTechnicalyConfirmedCommand>
 {
-    private readonly IOrderItemService _orderItemService;
-
-    public OrderItemTechnicalyConfirmedCommandHandler(IOrderItemService orderItemService)
-    {
-        _orderItemService = orderItemService;
-    }
+    private readonly IOrderItemService _orderItemService = orderItemService;
 
     public async Task Handle(OrderItemTechnicalyConfirmedCommand request, CancellationToken cancellationToken)
     {

@@ -2,9 +2,6 @@
 using Shahrah.Framework.Payment;
 using Shahrah.Transporter.Application.Payments.Models;
 using Shahrah.Transporter.Domain.Entities;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.OrderItems.Services.Interfaces;
 

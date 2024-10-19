@@ -1,14 +1,9 @@
 ﻿using Shahrah.Framework.Models;
-using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Domain.Entities;
 
-public class Plan : Entity<int>
+public class Plan(int id) : Entity<int>(id)
 {
-    public Plan(int id) : base(id)
-    {
-    }
-
     public string Title { get; set; }
     public int Days { get; set; }
     public decimal Price { get; set; }

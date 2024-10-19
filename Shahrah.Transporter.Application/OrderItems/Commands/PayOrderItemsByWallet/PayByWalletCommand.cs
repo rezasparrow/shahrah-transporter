@@ -1,19 +1,12 @@
 ﻿using MediatR;
-using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Application.OrderItems.Commands.PayOrderItemsByWallet;
 
 /// <summary>
 /// پرداخت لاین آیتمها از کیف پول
 /// </summary>
-public class PayByWalletCommand : IRequest
+public class PayByWalletCommand(long personId, List<int> orderItemIdentities) : IRequest
 {
-    public long PersonId { get; }
-    public List<int> OrderItemIdentities { get; }
-
-    public PayByWalletCommand(long personId, List<int> orderItemIdentities)
-    {
-        OrderItemIdentities = orderItemIdentities;
-        PersonId = personId;
-    }
+    public long PersonId { get; } = personId;
+    public List<int> OrderItemIdentities { get; } = orderItemIdentities;
 }

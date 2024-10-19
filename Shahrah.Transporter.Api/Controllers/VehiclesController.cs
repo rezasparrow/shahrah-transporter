@@ -12,22 +12,14 @@ using Shahrah.Transporter.Application.Vehicles.Models;
 using Shahrah.Transporter.Application.Vehicles.Queries.GetReadyVehiclesLookup;
 using Shahrah.Transporter.Application.Vehicles.Queries.GetVehicle;
 using Shahrah.Transporter.Application.Vehicles.Queries.GetVehicles;
-using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class VehiclesController : BaseController
+public class VehiclesController(IMediator mediator, ICurrentUserService currentUserService) : BaseController
 {
-    private readonly IMediator _mediator;
-    private readonly ICurrentUserService _currentUserService;
-
-    public VehiclesController(IMediator mediator, ICurrentUserService currentUserService)
-    {
-        _mediator = mediator;
-        _currentUserService = currentUserService;
-    }
+    private readonly IMediator _mediator = mediator;
+    private readonly ICurrentUserService _currentUserService = currentUserService;
 
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.OK)]

@@ -6,20 +6,11 @@ namespace Shahrah.Transporter.Application.Orders.Commands.ReSendOrder;
 /// <summary>
 /// ارسال مجدد سفارش
 /// </summary>
-public class ReSendOrderCommand : IRequest<Unit>, ITransactionalCommand
+public class ReSendOrderCommand(long personId, int orderId, long minimumOfferPrice, long maximumOfferPrice, int vehicleQuantity) : IRequest<Unit>, ITransactionalCommand
 {
-    public ReSendOrderCommand(long personId, int orderId, long minimumOfferPrice, long maximumOfferPrice, int vehicleQuantity)
-    {
-        PersonId = personId;
-        OrderId = orderId;
-        MinimumOfferPrice = minimumOfferPrice;
-        MaximumOfferPrice = maximumOfferPrice;
-        VehicleQuantity = vehicleQuantity;
-    }
-
-    public long PersonId { get; }
-    public int OrderId { get; }
-    public long MinimumOfferPrice { get; }
-    public long MaximumOfferPrice { get; }
-    public int VehicleQuantity { get; }
+    public long PersonId { get; } = personId;
+    public int OrderId { get; } = orderId;
+    public long MinimumOfferPrice { get; } = minimumOfferPrice;
+    public long MaximumOfferPrice { get; } = maximumOfferPrice;
+    public int VehicleQuantity { get; } = vehicleQuantity;
 }

@@ -1,6 +1,41 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0.8 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
-COPY bin/Release/net6.0/linux-x64/publish/ .
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+##### Copy Project - FrameWork
+COPY ["shahrah-framework/Shahrah.Framework/Shahrah.Framework.csproj", "shahrah-framework/Shahrah.Framework/"]
+RUN dotnet restore "shahrah-framework/Shahrah.Framework/Shahrah.Framework.csproj"
+
+##### Copy Project - Source
+COPY ["shahrah-transporter/Directory.Build.props" ,"shahrah-transporter/Directory.Build.props"]
+COPY ["shahrah-transporter/Directory.Build.targets" ,"shahrah-transporter/Directory.Build.targets"]
+COPY ["shahrah-transporter/Shahrah.Transporter.Application/Shahrah.Transporter.Application.csproj", "shahrah-transporter/Shahrah.Transporter.Application/"]
+COPY ["shahrah-transporter/Shahrah.Transporter.Domain/Shahrah.Transporter.Domain.csproj", "shahrah-transporter/Shahrah.Transporter.Domain/"]
+COPY ["shahrah-transporter/Shahrah.Transporter.Api/Shahrah.Transporter.Api.csproj", "shahrah-transporter/Shahrah.Transporter.Api/"]
+COPY ["shahrah-transporter/Shahrah.Transporter.Infrastructure/Shahrah.Transporter.Infrastructure.csproj", "shahrah-transporter/Shahrah.Transporter.Infrastructure/"]
+
+##### Restrore - Source
+RUN dotnet restore "shahrah-transporter/Shahrah.Transporter.Api/Shahrah.Transporter.Api.csproj"
+
+##### Copy - Source
+COPY ["shahrah-framework/Shahrah.Framework/", "shahrah-framework/Shahrah.Framework/"]
+COPY ["shahrah-transporter/Shahrah.Transporter.Api/", "shahrah-transporter/Shahrah.Transporter.Api/"]
+COPY ["shahrah-transporter/Shahrah.Transporter.Application/", "shahrah-transporter/Shahrah.Transporter.Application/"]
+COPY ["shahrah-transporter/Shahrah.Transporter.Domain/", "shahrah-transporter/Shahrah.Transporter.Domain/"]
+COPY ["shahrah-transporter/Shahrah.Transporter.Infrastructure/", "shahrah-transporter/Shahrah.Transporter.Infrastructure/"]
+
+##### Build - Source
+RUN dotnet build "shahrah-transporter/Shahrah.Transporter.Api/Shahrah.Transporter.Api.csproj" -c Release -o /app/build
+
+##### Publish
+FROM build AS publish
+RUN dotnet publish "shahrah-transporter/Shahrah.Transporter.Api/Shahrah.Transporter.Api.csproj" -c Release -o /app/publish
+
+##### Final
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Shahrah.Transporter.Api.dll"]

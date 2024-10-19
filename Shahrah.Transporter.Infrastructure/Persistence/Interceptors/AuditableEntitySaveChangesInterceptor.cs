@@ -3,21 +3,12 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Shahrah.Framework.Models;
 using Shahrah.Framework.Services;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Infrastructure.Persistence.Interceptors;
 
-public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
+public class AuditableEntitySaveChangesInterceptor(ICurrentUserService currentUserService) : SaveChangesInterceptor
 {
-    private readonly ICurrentUserService _currentUserService;
-
-    public AuditableEntitySaveChangesInterceptor(ICurrentUserService currentUserService)
-    {
-        _currentUserService = currentUserService;
-    }
+    private readonly ICurrentUserService _currentUserService = currentUserService;
 
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {

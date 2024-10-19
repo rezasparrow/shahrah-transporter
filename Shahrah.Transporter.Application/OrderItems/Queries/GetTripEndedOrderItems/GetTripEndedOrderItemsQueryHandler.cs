@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shahrah.Framework.Extensions;
 using Shahrah.Transporter.Application.Common.Interfaces;
@@ -14,17 +10,11 @@ using Shahrah.Transporter.Domain.Models.DataTransferObjects;
 
 namespace Shahrah.Transporter.Application.OrderItems.Queries.GetTripEndedOrderItems;
 
-public class GetTripEndedOrderItemsQueryHandler : IRequestHandler<GetTripEndedOrderItemsQuery, IEnumerable<TripEndedOrderItemDto>>
+public class GetTripEndedOrderItemsQueryHandler(IApplicationDbContext dbContext,
+    IReportService reportService) : IRequestHandler<GetTripEndedOrderItemsQuery, IEnumerable<TripEndedOrderItemDto>>
 {
-    private readonly IReportService _reportService;
-    private readonly IApplicationDbContext _dbContext;
-
-    public GetTripEndedOrderItemsQueryHandler(IApplicationDbContext dbContext, 
-        IReportService reportService)
-    {
-        _dbContext = dbContext;
-        _reportService = reportService;
-    }
+    private readonly IReportService _reportService = reportService;
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task<IEnumerable<TripEndedOrderItemDto>> Handle(GetTripEndedOrderItemsQuery request, CancellationToken cancellationToken)
     {

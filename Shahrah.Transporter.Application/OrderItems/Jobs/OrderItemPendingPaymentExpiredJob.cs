@@ -1,8 +1,6 @@
 ﻿using Shahrah.Framework.Scheduling;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.OrderItems.Services.Interfaces;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.OrderItems.Jobs;
 
@@ -10,16 +8,10 @@ namespace Shahrah.Transporter.Application.OrderItems.Jobs;
 /// مهلت پرداخت از زمانی راننده منتظر پرداخت میمونه تا قبل از رفتن به بانک
 /// همون تایم 5 دقیقه
 /// </summary>
-public class OrderItemPendingPaymentExpiredJob : DelayedJob
+public class OrderItemPendingPaymentExpiredJob(IOrderItemService orderItemService, IApplicationDbContext dbContext) : DelayedJob
 {
-    private readonly IOrderItemService _orderItemService;
-    private readonly IApplicationDbContext _dbContext;
-
-    public OrderItemPendingPaymentExpiredJob(IOrderItemService orderItemService, IApplicationDbContext dbContext)
-    {
-        _orderItemService = orderItemService;
-        _dbContext = dbContext;
-    }
+    private readonly IOrderItemService _orderItemService = orderItemService;
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public override async Task RunAsync(Dictionary<string, string> data)
     {

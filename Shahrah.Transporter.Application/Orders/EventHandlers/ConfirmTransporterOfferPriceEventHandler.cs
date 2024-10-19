@@ -1,6 +1,5 @@
 ﻿using Shahrah.Framework.Events;
 using Shahrah.Transporter.Application.Orders.Services.Interfaces;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.EventHandlers;
 
@@ -8,14 +7,9 @@ namespace Shahrah.Transporter.Application.Orders.EventHandlers;
 /// اگر قیمت بالاتر از قیمت پیشنهادی سندر باشه، سندر باید تائید بده
 /// تو این ایونت میگه که سندر تائید داده یا نه
 /// </summary>
-public class ConfirmTransporterOfferPriceEventHandler : KafkaEventHandler<ConfirmTransporterOfferPriceEvent>
+public class ConfirmTransporterOfferPriceEventHandler(IOrderService orderService) : KafkaEventHandler<ConfirmTransporterOfferPriceEvent>
 {
-    private readonly IOrderService _orderService;
-
-    public ConfirmTransporterOfferPriceEventHandler(IOrderService orderService)
-    {
-        _orderService = orderService;
-    }
+    private readonly IOrderService _orderService = orderService;
 
     public override async Task Handle(ConfirmTransporterOfferPriceEvent message)
     {

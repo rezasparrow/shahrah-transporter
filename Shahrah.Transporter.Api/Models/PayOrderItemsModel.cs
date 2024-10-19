@@ -1,5 +1,4 @@
 using Shahrah.Framework.Payment;
-using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Api.Models;
 

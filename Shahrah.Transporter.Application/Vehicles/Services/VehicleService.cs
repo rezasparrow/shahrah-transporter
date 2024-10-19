@@ -8,29 +8,17 @@ using Shahrah.Transporter.Application.Orders.EventPublishers;
 using Shahrah.Transporter.Application.Vehicles.Models;
 using Shahrah.Transporter.Application.Vehicles.Services.Interfaces;
 using SlimMessageBus;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using PersonTypeEnum = Shahrah.Transporter.Domain.Enums.PersonTypeEnum;
 using Vehicle = Shahrah.Transporter.Domain.Entities.Vehicle;
 using VehicleOptionItem = Shahrah.Transporter.Domain.Entities.VehicleOptionItem;
 
 namespace Shahrah.Transporter.Application.Vehicles.Services;
 
-public class VehicleService : IVehicleService
+public class VehicleService(IApplicationDbContext dbContext, IMessageBus messageBus, TransportersVehicleUpdatedEventPublisher transportersVehicleUpdatedEventPublisher) : IVehicleService
 {
-    private readonly IApplicationDbContext _dbContext;
-    private readonly IMessageBus _messageBus;
-    private readonly TransportersVehicleUpdatedEventPublisher _transportersVehicleUpdatedEventPublisher;
-
-    public VehicleService(IApplicationDbContext dbContext, IMessageBus messageBus, TransportersVehicleUpdatedEventPublisher transportersVehicleUpdatedEventPublisher)
-    {
-        _dbContext = dbContext;
-        _messageBus = messageBus;
-        _transportersVehicleUpdatedEventPublisher = transportersVehicleUpdatedEventPublisher;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
+    private readonly IMessageBus _messageBus = messageBus;
+    private readonly TransportersVehicleUpdatedEventPublisher _transportersVehicleUpdatedEventPublisher = transportersVehicleUpdatedEventPublisher;
 
     public async Task AssignDriver(long personId, int vehicleId, int driverId, CancellationToken cancellationToken = default)
     {

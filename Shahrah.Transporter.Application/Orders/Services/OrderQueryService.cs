@@ -2,19 +2,12 @@
 using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.Orders.Services.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.Services;
 
-internal class OrderQueryService : IOrderQueryService
+internal class OrderQueryService(IApplicationDbContext dbContext) : IOrderQueryService
 {
-    private readonly IApplicationDbContext _dbContext;
-
-    public OrderQueryService(IApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task<Order> GetOrderWithAllDataAsync(long? personId, int orderId)
     {

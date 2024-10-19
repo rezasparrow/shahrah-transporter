@@ -4,12 +4,7 @@ using Shahrah.Transporter.Domain.Entities;
 
 namespace Shahrah.Transporter.Application.People.Commands.RegisterPerson;
 
-public class RegisterPersonCommand : IRequest<Unit>, ITransactionalCommand
+public class RegisterPersonCommand(Person realPerson) : IRequest<Unit>, ITransactionalCommand
 {
-    public RegisterPersonCommand(Person realPerson)
-    {
-        RealPerson = realPerson;
-    }
-
-    public Person RealPerson { get; }
+    public Person RealPerson { get; } = realPerson;
 }

@@ -1,6 +1,5 @@
 using Shahrah.Framework.Models;
 using Shahrah.Transporter.Domain.Enums;
-using System;
 
 namespace Shahrah.Transporter.Domain.Entities;
 

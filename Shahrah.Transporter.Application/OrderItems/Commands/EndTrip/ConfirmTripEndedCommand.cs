@@ -8,14 +8,8 @@ namespace Shahrah.Transporter.Application.OrderItems.Commands.EndTrip;
 /// این به این معنی نیست که بار حتما سفر تمام شده
 /// بلکه اعلام یکی از سه نفر میباشد
 /// </summary>
-public class ConfirmTripEndedCommand : IRequest, ITransactionalCommand
+public class ConfirmTripEndedCommand(int orderItemId, long personId) : IRequest, ITransactionalCommand
 {
-    public ConfirmTripEndedCommand(int orderItemId, long personId)
-    {
-        OrderItemId = orderItemId;
-        PersonId = personId;
-    }
-
-    public int OrderItemId { get; }
-    public long PersonId { get; }
+    public int OrderItemId { get; } = orderItemId;
+    public long PersonId { get; } = personId;
 }

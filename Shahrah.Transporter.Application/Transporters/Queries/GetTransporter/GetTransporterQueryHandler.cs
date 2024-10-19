@@ -1,20 +1,13 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.Transporters.Models;
 
 namespace Shahrah.Transporter.Application.Transporters.Queries.GetTransporter;
 
-public class GetTransporterQueryHandler : IRequestHandler<GetTransporterQuery, TransporterDto>
+public class GetTransporterQueryHandler(IApplicationDbContext dbContext) : IRequestHandler<GetTransporterQuery, TransporterDto>
 {
-    private readonly IApplicationDbContext _dbContext;
-
-    public GetTransporterQueryHandler(IApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task<TransporterDto> Handle(GetTransporterQuery request, CancellationToken cancellationToken)
     {

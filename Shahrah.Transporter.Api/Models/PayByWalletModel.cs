@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Shahrah.Transporter.Api.Models;
+﻿namespace Shahrah.Transporter.Api.Models;
 
 public class PayByWalletModel
 {

@@ -6,16 +6,9 @@ namespace Shahrah.Transporter.Application.Orders.Commands.OfferPrice;
 /// <summary>
 /// ثبت قیمت توسط تی سی برای سفارش
 /// </summary>
-public class OfferPriceCommand : IRequest<Unit>, ITransactionalCommand
+public class OfferPriceCommand(long personId, int orderId, decimal price) : IRequest<Unit>, ITransactionalCommand
 {
-    public long PersonId { get; }
-    public int OrderId { get; }
-    public decimal Price { get; }
-
-    public OfferPriceCommand(long personId, int orderId, decimal price)
-    {
-        PersonId = personId;
-        OrderId = orderId;
-        Price = price;
-    }
+    public long PersonId { get; } = personId;
+    public int OrderId { get; } = orderId;
+    public decimal Price { get; } = price;
 }

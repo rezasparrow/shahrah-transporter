@@ -3,21 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.Orders.Models;
 using Shahrah.Transporter.Application.People.Services.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.Queries.GetOrderSenderInfo;
 
-public class GetOrderSenderInfoQueryHandler : IRequestHandler<GetOrderSenderInfoQuery, OrderSenderInfoDto>
+public class GetOrderSenderInfoQueryHandler(IApplicationDbContext dbContext, IPersonService subscriptionService) : IRequestHandler<GetOrderSenderInfoQuery, OrderSenderInfoDto>
 {
-    private readonly IApplicationDbContext _dbContext;
-    private readonly IPersonService _subscriptionService;
-
-    public GetOrderSenderInfoQueryHandler(IApplicationDbContext dbContext, IPersonService subscriptionService)
-    {
-        _dbContext = dbContext;
-        _subscriptionService = subscriptionService;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
+    private readonly IPersonService _subscriptionService = subscriptionService;
 
     public async Task<OrderSenderInfoDto> Handle(GetOrderSenderInfoQuery request, CancellationToken cancellationToken)
     {

@@ -1,17 +1,10 @@
 ﻿using MediatR;
 using Shahrah.Transporter.Domain.Entities;
-using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Application.Transporters.Queries.GetInProvinceTransporters;
 
-public class GetInProvinceTransportersQuery : IRequest<IEnumerable<Person>>
+public class GetInProvinceTransportersQuery(double latitude, double longitude) : IRequest<IEnumerable<Person>>
 {
-    public GetInProvinceTransportersQuery(double latitude, double longitude)
-    {
-        Latitude = latitude;
-        Longitude = longitude;
-    }
-
-    public double Latitude { get; }
-    public double Longitude { get; }
+    public double Latitude { get; } = latitude;
+    public double Longitude { get; } = longitude;
 }

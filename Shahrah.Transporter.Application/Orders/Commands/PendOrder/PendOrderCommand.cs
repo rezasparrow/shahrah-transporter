@@ -6,14 +6,8 @@ namespace Shahrah.Transporter.Application.Orders.Commands.PendOrder;
 /// <summary>
 /// پند کردن سفارش
 /// </summary>
-public class PendOrderCommand : IRequest<Unit>, ITransactionalCommand
+public class PendOrderCommand(int orderId, long personId) : IRequest<Unit>, ITransactionalCommand
 {
-    public PendOrderCommand(int orderId, long personId)
-    {
-        OrderId = orderId;
-        PersonId = personId;
-    }
-
-    public int OrderId { get; }
-    public long PersonId { get; }
+    public int OrderId { get; } = orderId;
+    public long PersonId { get; } = personId;
 }

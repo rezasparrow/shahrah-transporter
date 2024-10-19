@@ -1,7 +1,6 @@
 using Shahrah.Framework.Resources;
 using Shahrah.Transporter.Application.Transporters.Models;
 using Shahrah.Transporter.Domain.Enums;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Shahrah.Transporter.Api.Models;

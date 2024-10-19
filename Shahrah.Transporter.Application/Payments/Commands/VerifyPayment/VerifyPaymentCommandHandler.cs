@@ -1,19 +1,12 @@
 ﻿using MediatR;
 using Shahrah.Transporter.Application.Payments.Models;
 using Shahrah.Transporter.Application.Payments.Services.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Payments.Commands.VerifyPayment;
 
-public class VerifyPaymentCommandHandler : IRequestHandler<VerifyPaymentCommand, VerifyPaymentResultDto>
+public class VerifyPaymentCommandHandler(IPaymentService paymentService) : IRequestHandler<VerifyPaymentCommand, VerifyPaymentResultDto>
 {
-    private readonly IPaymentService _paymentService;
-
-    public VerifyPaymentCommandHandler(IPaymentService paymentService)
-    {
-        _paymentService = paymentService;
-    }
+    private readonly IPaymentService _paymentService = paymentService;
 
     public async Task<VerifyPaymentResultDto> Handle(VerifyPaymentCommand request, CancellationToken cancellationToken)
     {

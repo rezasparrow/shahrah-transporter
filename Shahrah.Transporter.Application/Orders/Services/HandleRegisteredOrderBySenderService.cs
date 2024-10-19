@@ -9,30 +9,16 @@ using Shahrah.Transporter.Application.Orders.Services.Interfaces;
 using Shahrah.Transporter.Application.Transporters.Services.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
 using Shahrah.Transporter.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.Services;
 
-public class HandleRegisteredOrderBySenderService : IHandleRegisteredOrderBySenderService
+public class HandleRegisteredOrderBySenderService(INotificationService notificationService, TransporterRegisteredSenderOrderEventPublisher transporterRegisteredSenderOrderEventPublisher, IApplicationDbContext dbContext, IJobScheduler jobScheduler, ITransporterService transporterService) : IHandleRegisteredOrderBySenderService
 {
-    private readonly INotificationService _notificationService;
-    private readonly TransporterRegisteredSenderOrderEventPublisher _transporterRegisteredSenderOrderEventPublisher;
-    private readonly IApplicationDbContext _dbContext;
-    private readonly IJobScheduler _jobScheduler;
-    private readonly ITransporterService _transporterService;
-
-    public HandleRegisteredOrderBySenderService(INotificationService notificationService, TransporterRegisteredSenderOrderEventPublisher transporterRegisteredSenderOrderEventPublisher, IApplicationDbContext dbContext, IJobScheduler jobScheduler, ITransporterService transporterService)
-    {
-        _notificationService = notificationService;
-        _transporterRegisteredSenderOrderEventPublisher = transporterRegisteredSenderOrderEventPublisher;
-        _dbContext = dbContext;
-        _jobScheduler = jobScheduler;
-        _transporterService = transporterService;
-    }
+    private readonly INotificationService _notificationService = notificationService;
+    private readonly TransporterRegisteredSenderOrderEventPublisher _transporterRegisteredSenderOrderEventPublisher = transporterRegisteredSenderOrderEventPublisher;
+    private readonly IApplicationDbContext _dbContext = dbContext;
+    private readonly IJobScheduler _jobScheduler = jobScheduler;
+    private readonly ITransporterService _transporterService = transporterService;
 
     public async Task Handle(OrderRegisteredBySenderEvent orderRegisteredBySenderEvent, CancellationToken cancellationToken = default)
     {

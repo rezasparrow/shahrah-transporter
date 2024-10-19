@@ -3,12 +3,7 @@ using Shahrah.Transporter.Domain.Entities;
 
 namespace Shahrah.Transporter.Application.People.Queries.GetPersonAllData;
 
-public class GetPersonAllDataQuery : IRequest<Person>
+public class GetPersonAllDataQuery(string mobileNumber) : IRequest<Person>
 {
-    public GetPersonAllDataQuery(string mobileNumber)
-    {
-        MobileNumber = mobileNumber;
-    }
-
-    public string MobileNumber { get; }
+    public string MobileNumber { get; } = mobileNumber;
 }

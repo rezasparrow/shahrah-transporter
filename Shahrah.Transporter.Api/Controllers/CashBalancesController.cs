@@ -2,22 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Shahrah.Framework.Services;
 using Shahrah.Transporter.Application.People.Queries.GetCashBalance;
-using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class CashBalancesController : BaseController
+public class CashBalancesController(IMediator mediator, ICurrentUserService currentUserService) : BaseController
 {
-    private readonly IMediator _mediator;
-    private readonly ICurrentUserService _currentUserService;
-
-    public CashBalancesController(IMediator mediator, ICurrentUserService currentUserService)
-    {
-        _mediator = mediator;
-        _currentUserService = currentUserService;
-    }
+    private readonly IMediator _mediator = mediator;
+    private readonly ICurrentUserService _currentUserService = currentUserService;
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<long>), (int)HttpStatusCode.OK)]

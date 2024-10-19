@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shahrah.Framework.Extensions;
@@ -14,16 +10,10 @@ using Shahrah.Transporter.Domain.Models.DataTransferObjects;
 
 namespace Shahrah.Transporter.Application.OrderItems.Queries.GetPaidOrderItems;
 
-public class GetPaidOrderItemsQueryHandler : IRequestHandler<GetPaidOrderItemsQuery, IEnumerable<PaidOrderItemDto>>
+public class GetPaidOrderItemsQueryHandler(IApplicationDbContext dbContext, IReportService reportService) : IRequestHandler<GetPaidOrderItemsQuery, IEnumerable<PaidOrderItemDto>>
 {
-    private readonly IApplicationDbContext _dbContext;
-    private readonly IReportService _reportService;
-
-    public GetPaidOrderItemsQueryHandler(IApplicationDbContext dbContext, IReportService reportService)
-    {
-        _dbContext = dbContext;
-        _reportService = reportService;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
+    private readonly IReportService _reportService = reportService;
 
     public async Task<IEnumerable<PaidOrderItemDto>> Handle(GetPaidOrderItemsQuery request, CancellationToken cancellationToken)
     {

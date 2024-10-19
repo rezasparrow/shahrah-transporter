@@ -1,20 +1,11 @@
 ﻿using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.FinancialTransactions.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.FinancialTransactions.Services;
 
-public class FinancialTransactionService : IFinancialTransactionService
+public class FinancialTransactionService(IApplicationDbContext dbContext) : IFinancialTransactionService
 {
-    private readonly IApplicationDbContext _dbContext;
-
-    public FinancialTransactionService(IApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task CreateTransaction(FinancialTransactionBuilderFinal builder)
     {

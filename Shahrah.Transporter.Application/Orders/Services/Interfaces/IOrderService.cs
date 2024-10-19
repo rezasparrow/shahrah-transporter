@@ -1,7 +1,5 @@
 ﻿using Shahrah.Framework.Events;
 using Shahrah.Transporter.Application.Orders.Models;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.Services.Interfaces;
 

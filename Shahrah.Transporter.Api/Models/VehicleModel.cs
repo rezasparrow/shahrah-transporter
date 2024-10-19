@@ -1,6 +1,4 @@
 ﻿using Shahrah.Framework.Resources;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Shahrah.Transporter.Api.Models;

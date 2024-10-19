@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-using System.Linq;
-
 namespace Shahrah.Transporter.Api.Controllers
 {
     [Route("api/[controller]")]

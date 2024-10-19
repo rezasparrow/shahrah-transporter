@@ -3,21 +3,13 @@ using Shahrah.Framework.Events;
 using Shahrah.Framework.Scheduling;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using SlimMessageBus;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.Jobs;
 
-public class OrderPendingFinishedJob : DelayedJob
+public class OrderPendingFinishedJob(IMessageBus messageBus, IApplicationDbContext dbContext) : DelayedJob
 {
-    private readonly IMessageBus _messageBus;
-    private readonly IApplicationDbContext _dbContext;
-
-    public OrderPendingFinishedJob(IMessageBus messageBus, IApplicationDbContext dbContext)
-    {
-        _messageBus = messageBus;
-        _dbContext = dbContext;
-    }
+    private readonly IMessageBus _messageBus = messageBus;
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public override async Task RunAsync(Dictionary<string, string> data)
     {

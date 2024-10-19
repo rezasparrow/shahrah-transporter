@@ -12,33 +12,21 @@ using Shahrah.Transporter.Application.OrderItems.Commands.PayOrderItemsByWallet;
 using Shahrah.Transporter.Application.Payments.Commands.ChargeWallet;
 using Shahrah.Transporter.Application.Payments.Commands.RegisterPaymentForSubscription;
 using Shahrah.Transporter.Application.Payments.Commands.VerifyPayment;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class PaymentsController : BaseController
+public class PaymentsController(
+    IOnlinePayment onlinePayment,
+    IMediator mediator,
+
+    IOptions<AppSettings> settings,
+    ICurrentUserService currentUserService) : BaseController
 {
-    private readonly IOnlinePayment _onlinePayment;
-    private readonly IMediator _mediator;
+    private readonly IOnlinePayment _onlinePayment = onlinePayment;
+    private readonly IMediator _mediator = mediator;
 
-    private readonly AppSettings _settings;
-    private readonly ICurrentUserService _currentUserService;
-
-    public PaymentsController(
-        IOnlinePayment onlinePayment,
-        IMediator mediator,
-
-        IOptions<AppSettings> settings,
-        ICurrentUserService currentUserService)
-    {
-        _onlinePayment = onlinePayment;
-        _mediator = mediator;
-
-        _settings = settings.Value;
-        _currentUserService = currentUserService;
-    }
+    private readonly AppSettings _settings = settings.Value;
+    private readonly ICurrentUserService _currentUserService = currentUserService;
 
     [HttpPost("pay")]
     public async Task<IActionResult> Pay([FromBody] PayOrderItemsModel payOrderItemsModel)

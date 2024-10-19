@@ -12,30 +12,16 @@ using Shahrah.Transporter.Application.People.Jobs;
 using Shahrah.Transporter.Application.People.Services.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
 using Shahrah.Transporter.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.People.Services;
 
-public class PersonService : IPersonService
+public class PersonService(IApplicationDbContext dbContext, IIdentityServerService identityServerService, IJobScheduler jobScheduler, AppSettings appSettings, INotificationService notificationService) : IPersonService
 {
-    private readonly IApplicationDbContext _dbContext;
-    private readonly IIdentityServerService _identityServerService;
-    private readonly IJobScheduler _jobScheduler;
-    private readonly AppSettings _appSettings;
-    private readonly INotificationService _notificationService;
-
-    public PersonService(IApplicationDbContext dbContext, IIdentityServerService identityServerService, IJobScheduler jobScheduler, AppSettings appSettings, INotificationService notificationService)
-    {
-        _dbContext = dbContext;
-        _identityServerService = identityServerService;
-        _jobScheduler = jobScheduler;
-        _appSettings = appSettings;
-        _notificationService = notificationService;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
+    private readonly IIdentityServerService _identityServerService = identityServerService;
+    private readonly IJobScheduler _jobScheduler = jobScheduler;
+    private readonly AppSettings _appSettings = appSettings;
+    private readonly INotificationService _notificationService = notificationService;
 
     public async Task<bool> HasSubscription(long personId)
     {

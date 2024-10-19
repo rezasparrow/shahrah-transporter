@@ -6,20 +6,13 @@ using Shahrah.Transporter.Application.Transporters.Commands.RegisterTransporter;
 using Shahrah.Transporter.Application.Transporters.Models;
 using Shahrah.Transporter.Application.Transporters.Queries.GetTransporter;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class TransportersController : BaseController
+public class TransportersController(IMediator mediator, ICurrentUserService currentUserService) : BaseController
 {
-    private readonly IMediator _mediator;
-    private readonly ICurrentUserService _currentUserService;
-
-    public TransportersController(IMediator mediator, ICurrentUserService currentUserService)
-    {
-        _mediator = mediator;
-        _currentUserService = currentUserService;
-    }
+    private readonly IMediator _mediator = mediator;
+    private readonly ICurrentUserService _currentUserService = currentUserService;
 
     [HttpPost]
     [ProducesResponseType(typeof(UserModel), (int)HttpStatusCode.OK)]

@@ -7,14 +7,8 @@ namespace Shahrah.Transporter.Application.Orders.Commands.RegisterOrder;
 /// <summary>
 /// ثبت سفارش توسط تی سی
 /// </summary>
-public class RegisterOrderCommand : IRequest<Unit>, ITransactionalCommand
+public class RegisterOrderCommand(RegisterOrderDto order, long personId) : IRequest<Unit>, ITransactionalCommand
 {
-    public RegisterOrderCommand(RegisterOrderDto order, long personId)
-    {
-        Order = order;
-        PersonId = personId;
-    }
-
-    public RegisterOrderDto Order { get; }
-    public long PersonId { get; }
+    public RegisterOrderDto Order { get; } = order;
+    public long PersonId { get; } = personId;
 }

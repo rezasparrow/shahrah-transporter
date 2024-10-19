@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.People.Models;
@@ -9,14 +6,9 @@ using Shahrah.Transporter.Domain.Enums;
 
 namespace Shahrah.Transporter.Application.People.Queries.GetAgent;
 
-public class GetAgentQueryHandler : IRequestHandler<GetAgentQuery, PersonDto>
+public class GetAgentQueryHandler(IApplicationDbContext dbContext) : IRequestHandler<GetAgentQuery, PersonDto>
 {
-    private readonly IApplicationDbContext _dbContext;
-
-    public GetAgentQueryHandler(IApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task<PersonDto> Handle(GetAgentQuery request, CancellationToken cancellationToken)
     {

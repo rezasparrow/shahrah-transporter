@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Shahrah.Transporter.Application.People.Models;
+﻿namespace Shahrah.Transporter.Application.People.Models;
 
 public class RegisterPersonDto
 {

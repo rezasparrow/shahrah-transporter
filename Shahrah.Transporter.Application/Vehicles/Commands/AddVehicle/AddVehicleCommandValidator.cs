@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using Shahrah.Framework.Resources;
 using Shahrah.Framework.Validators;
-using System;
 
 namespace Shahrah.Transporter.Application.Vehicles.Commands.AddVehicle;
 

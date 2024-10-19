@@ -1,18 +1,11 @@
 ﻿using MediatR;
 using Shahrah.Transporter.Application.OrderItems.Services.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.OrderItems.Commands.ConfirmLoading;
 
-public class ConfirmLoadingCommandHandler : IRequestHandler<ConfirmLoadingCommand>
+public class ConfirmLoadingCommandHandler(IOrderItemService orderItemService) : IRequestHandler<ConfirmLoadingCommand>
 {
-    private readonly IOrderItemService _orderItemService;
-
-    public ConfirmLoadingCommandHandler(IOrderItemService orderItemService)
-    {
-        _orderItemService = orderItemService;
-    }
+    private readonly IOrderItemService _orderItemService = orderItemService;
 
     public async Task Handle(ConfirmLoadingCommand request, CancellationToken cancellationToken)
     {

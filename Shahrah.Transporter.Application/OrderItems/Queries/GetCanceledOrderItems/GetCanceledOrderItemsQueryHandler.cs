@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shahrah.Framework.Extensions;
@@ -12,14 +8,9 @@ using Shahrah.Transporter.Domain.Models.DataTransferObjects;
 
 namespace Shahrah.Transporter.Application.OrderItems.Queries.GetCanceledOrderItems;
 
-public class GetCanceledOrderItemsQueryHandler : IRequestHandler<GetCanceledOrderItemsQuery, IEnumerable<CanceledOrderItemDto>>
+public class GetCanceledOrderItemsQueryHandler(IApplicationDbContext dbContext) : IRequestHandler<GetCanceledOrderItemsQuery, IEnumerable<CanceledOrderItemDto>>
 {
-    private readonly IApplicationDbContext _dbContext;
-
-    public GetCanceledOrderItemsQueryHandler(IApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task<IEnumerable<CanceledOrderItemDto>> Handle(GetCanceledOrderItemsQuery request, CancellationToken cancellationToken)
     {

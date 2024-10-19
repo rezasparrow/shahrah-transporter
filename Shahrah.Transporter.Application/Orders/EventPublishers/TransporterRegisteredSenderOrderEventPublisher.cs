@@ -2,21 +2,13 @@
 using Shahrah.Framework.Models;
 using Shahrah.Transporter.Application.Orders.Services.Interfaces;
 using SlimMessageBus;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.EventPublishers;
 
-public class TransporterRegisteredSenderOrderEventPublisher
+public class TransporterRegisteredSenderOrderEventPublisher(IMessageBus messageBus, IOrderQueryService orderQueryService)
 {
-    private readonly IMessageBus _messageBus;
-    private readonly IOrderQueryService _orderQueryService;
-
-    public TransporterRegisteredSenderOrderEventPublisher(IMessageBus messageBus, IOrderQueryService orderQueryService)
-    {
-        _messageBus = messageBus;
-        _orderQueryService = orderQueryService;
-    }
+    private readonly IMessageBus _messageBus = messageBus;
+    private readonly IOrderQueryService _orderQueryService = orderQueryService;
 
     public async Task Publish(int orderId, long? personId)
     {

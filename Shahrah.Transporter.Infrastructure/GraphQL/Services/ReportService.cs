@@ -2,21 +2,12 @@
 using GraphQL.Client.Abstractions;
 using Shahrah.Transporter.Domain.GraphQL;
 using Shahrah.Transporter.Domain.GraphQL.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Infrastructure.GraphQL.Services;
 
-public class ReportService : IReportService
+public class ReportService(IGraphQLClient client) : IReportService
 {
-    private readonly IGraphQLClient _client;
-
-    public ReportService(IGraphQLClient client)
-    {
-        _client = client;
-    }
-
+    private readonly IGraphQLClient _client = client;
 
     public async Task<List<ReportOrder>> GetOrderItems(Guid[] guids)
     {

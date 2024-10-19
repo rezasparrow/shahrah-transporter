@@ -14,24 +14,15 @@ using Shahrah.Transporter.Application.People.Queries.GetPerson;
 using Shahrah.Transporter.Application.People.Queries.InquiryExistenceMobileNumber;
 using Shahrah.Transporter.Application.Transporters.Queries.GetTransporter;
 using Shahrah.Transporter.Domain.Enums;
-using System;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class AccountsController : BaseController
+public class AccountsController(IMediator mediator, ICurrentUserService currentUserService, IIdentityServerService identityServerService) : BaseController
 {
-    private readonly IMediator _mediator;
-    private readonly ICurrentUserService _currentUserService;
-    private readonly IIdentityServerService _identityServerService;
-
-    public AccountsController(IMediator mediator, ICurrentUserService currentUserService, IIdentityServerService identityServerService)
-    {
-        _mediator = mediator;
-        _currentUserService = currentUserService;
-        _identityServerService = identityServerService;
-    }
+    private readonly IMediator _mediator = mediator;
+    private readonly ICurrentUserService _currentUserService = currentUserService;
+    private readonly IIdentityServerService _identityServerService = identityServerService;
 
     [HttpPost("send-verification-token")]
     [AllowAnonymous]

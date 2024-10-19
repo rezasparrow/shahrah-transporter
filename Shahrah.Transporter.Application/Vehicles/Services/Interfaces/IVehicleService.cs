@@ -1,6 +1,4 @@
 ﻿using Shahrah.Transporter.Application.Vehicles.Models;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Vehicles.Services.Interfaces;
 

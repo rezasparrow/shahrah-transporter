@@ -1,18 +1,11 @@
 ﻿using MediatR;
 using Shahrah.Transporter.Application.OrderItems.Services.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.OrderItems.Commands.EndTrip;
 
-public class ConfirmTripEndedCommandHandler : IRequestHandler<ConfirmTripEndedCommand>
+public class ConfirmTripEndedCommandHandler(IOrderItemService orderItemService) : IRequestHandler<ConfirmTripEndedCommand>
 {
-    private readonly IOrderItemService _orderItemService;
-
-    public ConfirmTripEndedCommandHandler(IOrderItemService orderItemService)
-    {
-        _orderItemService = orderItemService;
-    }
+    private readonly IOrderItemService _orderItemService = orderItemService;
 
     public async Task Handle(ConfirmTripEndedCommand request, CancellationToken cancellationToken)
     {

@@ -1,5 +1,4 @@
 ﻿using Shahrah.Transporter.Application.Lookups.Models;
-using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Application.Vehicles.Models;
 

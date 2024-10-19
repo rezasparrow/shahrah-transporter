@@ -1,24 +1,16 @@
 ﻿using Shahrah.Framework.Scheduling;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.Orders.Services.Interfaces;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.Jobs;
 
 /// <summary>
 /// مدت زمان لازم برای قیمت گذاری توسط تی سی برای سفارش تمام میشه
 /// </summary>
-public class OrderPricingFinishedJob : DelayedJob
+public class OrderPricingFinishedJob(IOrderPricingService orderPricingService, IApplicationDbContext dbContext) : DelayedJob
 {
-    private readonly IOrderPricingService _orderPricingService;
-    private readonly IApplicationDbContext _dbContext;
-
-    public OrderPricingFinishedJob(IOrderPricingService orderPricingService, IApplicationDbContext dbContext)
-    {
-        _orderPricingService = orderPricingService;
-        _dbContext = dbContext;
-    }
+    private readonly IOrderPricingService _orderPricingService = orderPricingService;
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public override async Task RunAsync(Dictionary<string, string> data)
     {

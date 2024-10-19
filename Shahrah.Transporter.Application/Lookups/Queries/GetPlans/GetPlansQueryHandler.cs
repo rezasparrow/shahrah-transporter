@@ -1,22 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.Lookups.Models;
 
 namespace Shahrah.Transporter.Application.Lookups.Queries.GetPlans;
 
-public class GetPlansQueryHandler : IRequestHandler<GetPlansQuery, IEnumerable<PlanDto>>
+public class GetPlansQueryHandler(IApplicationDbContext dbContext) : IRequestHandler<GetPlansQuery, IEnumerable<PlanDto>>
 {
-    private readonly IApplicationDbContext _dbContext;
-
-    public GetPlansQueryHandler(IApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task<IEnumerable<PlanDto>> Handle(GetPlansQuery request, CancellationToken cancellationToken)
     {

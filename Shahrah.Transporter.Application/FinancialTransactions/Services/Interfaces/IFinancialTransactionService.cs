@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Shahrah.Transporter.Application.FinancialTransactions.Services.Interfaces;
+﻿namespace Shahrah.Transporter.Application.FinancialTransactions.Services.Interfaces;
 
 public interface IFinancialTransactionService
 {

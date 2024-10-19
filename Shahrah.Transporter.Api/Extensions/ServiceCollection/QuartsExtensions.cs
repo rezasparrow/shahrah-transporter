@@ -1,8 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Shahrah.Framework.Extensions;
+﻿using Shahrah.Framework.Extensions;
 using Shahrah.Framework.Scheduling;
-using System.Linq;
 using System.Reflection;
 
 namespace Shahrah.Transporter.Api.Extensions.ServiceCollection

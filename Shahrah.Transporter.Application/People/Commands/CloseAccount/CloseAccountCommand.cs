@@ -3,12 +3,7 @@ using Shahrah.Transporter.Application.Common.Interfaces;
 
 namespace Shahrah.Transporter.Application.People.Commands.CloseAccount;
 
-public class CloseAccountCommand : IRequest<Unit>, ITransactionalCommand
+public class CloseAccountCommand(long personId) : IRequest<Unit>, ITransactionalCommand
 {
-    public CloseAccountCommand(long personId)
-    {
-        PersonId = personId;
-    }
-
-    public long PersonId { get; private set; }
+    public long PersonId { get; private set; } = personId;
 }

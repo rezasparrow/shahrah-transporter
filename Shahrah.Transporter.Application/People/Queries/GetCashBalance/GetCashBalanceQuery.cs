@@ -2,12 +2,7 @@
 
 namespace Shahrah.Transporter.Application.People.Queries.GetCashBalance;
 
-public class GetCashBalanceQuery : IRequest<decimal>
+public class GetCashBalanceQuery(long personId) : IRequest<decimal>
 {
-    public GetCashBalanceQuery(long personId)
-    {
-        PersonId = personId;
-    }
-
-    public long PersonId { get; }
+    public long PersonId { get; } = personId;
 }

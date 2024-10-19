@@ -6,12 +6,7 @@ namespace Shahrah.Transporter.Application.People.Commands.AgentNotAccept;
 /// <summary>
 /// ایجنت هنگام اولین لاگین قبول نمیکنه که ایجنت برای تی سی باشه
 /// </summary>
-public class AgentNotAcceptCommand : IRequest<Unit>, ITransactionalCommand
+public class AgentNotAcceptCommand(long agentId) : IRequest<Unit>, ITransactionalCommand
 {
-    public AgentNotAcceptCommand(long agentId)
-    {
-        AgentId = agentId;
-    }
-
-    public long AgentId { get; }
+    public long AgentId { get; } = agentId;
 }

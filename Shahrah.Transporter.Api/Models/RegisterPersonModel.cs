@@ -1,6 +1,5 @@
 using Shahrah.Framework.Resources;
 using Shahrah.Transporter.Application.People.Models;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Shahrah.Transporter.Api.Models;

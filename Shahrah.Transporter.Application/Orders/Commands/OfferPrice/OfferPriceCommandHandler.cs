@@ -1,18 +1,11 @@
 using MediatR;
 using Shahrah.Transporter.Application.Orders.Services.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.Commands.OfferPrice;
 
-public class OfferPriceCommandHandler : IRequestHandler<OfferPriceCommand, Unit>
+public class OfferPriceCommandHandler(IOrderPricingService orderPricingService) : IRequestHandler<OfferPriceCommand, Unit>
 {
-    private readonly IOrderPricingService _orderPricingService;
-
-    public OfferPriceCommandHandler(IOrderPricingService orderPricingService)
-    {
-        _orderPricingService = orderPricingService;
-    }
+    private readonly IOrderPricingService _orderPricingService = orderPricingService;
 
     public async Task<Unit> Handle(OfferPriceCommand request, CancellationToken cancellationToken)
     {

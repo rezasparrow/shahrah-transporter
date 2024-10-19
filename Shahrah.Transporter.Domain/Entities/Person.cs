@@ -1,7 +1,5 @@
 ﻿using Shahrah.Framework.Models;
 using Shahrah.Transporter.Domain.Enums;
-using System;
-using System.Collections.Generic;
 using PersonTypeEnum = Shahrah.Transporter.Domain.Enums.PersonTypeEnum;
 
 namespace Shahrah.Transporter.Domain.Entities;

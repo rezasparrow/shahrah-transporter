@@ -19,46 +19,25 @@ using Shahrah.Transporter.Application.People.Services.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
 using Shahrah.Transporter.Domain.Enums;
 using SlimMessageBus;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using OrderItemStatus = Shahrah.Transporter.Domain.Enums.OrderItemStatus;
 using OrderOptionItem = Shahrah.Transporter.Domain.Entities.OrderOptionItem;
 
 namespace Shahrah.Transporter.Application.Orders.Services;
 
-public class OrderService : IOrderService
+public class OrderService(IApplicationDbContext dbContext, AppSettings appSettings, IPersonService personService, IDriverService driverService, OrderItemCreatedEventPublisher orderItemCreatedEventPublisher, IMessageBus messageBus, SearchedDriverEventPublisher searchedDriverEventPublisher, INotificationService notificationService, IJobScheduler jobScheduler, OrderRegisteredEventPublisher orderRegisteredEventPublisher, ICloseOrderService closeOrderService, IOrderQueryService orderQueryService) : IOrderService
 {
-    private readonly IApplicationDbContext _dbContext;
-    private readonly AppSettings _appSettings;
-    private readonly IPersonService _personService;
-    private readonly IDriverService _driverService;
-    private readonly OrderItemCreatedEventPublisher _orderItemCreatedEventPublisher;
-    private readonly SearchedDriverEventPublisher _searchedDriverEventPublisher;
-    private readonly IMessageBus _messageBus;
-    private readonly INotificationService _notificationService;
-    private readonly IJobScheduler _jobScheduler;
-    private readonly OrderRegisteredEventPublisher _orderRegisteredEventPublisher;
-    private readonly ICloseOrderService _closeOrderService;
-    private readonly IOrderQueryService _orderQueryService;
-
-    public OrderService(IApplicationDbContext dbContext, AppSettings appSettings, IPersonService personService, IDriverService driverService, OrderItemCreatedEventPublisher orderItemCreatedEventPublisher, IMessageBus messageBus, SearchedDriverEventPublisher searchedDriverEventPublisher, INotificationService notificationService, IJobScheduler jobScheduler, OrderRegisteredEventPublisher orderRegisteredEventPublisher, ICloseOrderService closeOrderService, IOrderQueryService orderQueryService)
-    {
-        _dbContext = dbContext;
-        _appSettings = appSettings;
-        _personService = personService;
-        _driverService = driverService;
-        _orderItemCreatedEventPublisher = orderItemCreatedEventPublisher;
-        _messageBus = messageBus;
-        _searchedDriverEventPublisher = searchedDriverEventPublisher;
-        _notificationService = notificationService;
-        _jobScheduler = jobScheduler;
-        _orderRegisteredEventPublisher = orderRegisteredEventPublisher;
-        _closeOrderService = closeOrderService;
-        _orderQueryService = orderQueryService;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
+    private readonly AppSettings _appSettings = appSettings;
+    private readonly IPersonService _personService = personService;
+    private readonly IDriverService _driverService = driverService;
+    private readonly OrderItemCreatedEventPublisher _orderItemCreatedEventPublisher = orderItemCreatedEventPublisher;
+    private readonly SearchedDriverEventPublisher _searchedDriverEventPublisher = searchedDriverEventPublisher;
+    private readonly IMessageBus _messageBus = messageBus;
+    private readonly INotificationService _notificationService = notificationService;
+    private readonly IJobScheduler _jobScheduler = jobScheduler;
+    private readonly OrderRegisteredEventPublisher _orderRegisteredEventPublisher = orderRegisteredEventPublisher;
+    private readonly ICloseOrderService _closeOrderService = closeOrderService;
+    private readonly IOrderQueryService _orderQueryService = orderQueryService;
 
     public async Task<int> RegisterOrderAsync(RegisterOrderDto orderDto, long personId)
     {
@@ -107,7 +86,8 @@ public class OrderService : IOrderService
 
         _dbContext.Orders.Update(order);
         await _dbContext.SaveChangesAsync(cancellationToken);
-        await _searchedDriverEventPublisher.Publish(await _orderQueryService.GetOrderWithAllDataAsync(personId, orderId));
+        Order orderWithDetails = await _orderQueryService.GetOrderWithAllDataAsync(personId, orderId);
+        await _searchedDriverEventPublisher.Publish(orderWithDetails);
         await _notificationService.AddToTransporterPersonGroup(orderId, personId);
     }
 
@@ -256,7 +236,7 @@ public class OrderService : IOrderService
         };
 
         order.Status = OrderStatus.InProgress;
-        order.OrderItems ??= new List<OrderItem>();
+        order.OrderItems ??= [];
         order.OrderItems.Add(orderItem);
 
         _dbContext.Orders.Update(order);

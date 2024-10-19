@@ -4,8 +4,6 @@ using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using Shahrah.Framework.Data;
 using Shahrah.Transporter.Domain.Entities;
-using System;
-using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Infrastructure.Persistence.Configurations;
 

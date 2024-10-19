@@ -1,21 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shahrah.Framework.Scheduling;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Infrastructure.Persistence;
 
-public class ApplicationDbContextInitialiser
+public class ApplicationDbContextInitialiser(ApplicationDbContext dbContext, QuartzMigrator quartzMigrator)
 {
-    private readonly ApplicationDbContext _dbContext;
-    private readonly QuartzMigrator _quartzMigrator;
+    private readonly ApplicationDbContext _dbContext = dbContext;
+    private readonly QuartzMigrator _quartzMigrator = quartzMigrator;
     private static readonly object MigrationSyncRoot = new();
-
-    public ApplicationDbContextInitialiser(ApplicationDbContext dbContext, QuartzMigrator quartzMigrator)
-    {
-        _dbContext = dbContext;
-        _quartzMigrator = quartzMigrator;
-    }
 
     public async Task InitialiseAsync()
     {

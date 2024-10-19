@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.Lookups.Models;
@@ -10,14 +6,9 @@ using Shahrah.Transporter.Domain.Entities;
 
 namespace Shahrah.Transporter.Application.Lookups.Queries.GetCities;
 
-public class GetCitiesQueryHandler : IRequestHandler<GetCitiesQuery, IEnumerable<CityDto>>
+public class GetCitiesQueryHandler(IApplicationDbContext dbContext) : IRequestHandler<GetCitiesQuery, IEnumerable<CityDto>>
 {
-    private readonly IApplicationDbContext _dbContext;
-
-    public GetCitiesQueryHandler(IApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task<IEnumerable<CityDto>> Handle(GetCitiesQuery request, CancellationToken cancellationToken)
     {

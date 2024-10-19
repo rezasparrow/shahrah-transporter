@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Shahrah.Transporter.Application.Vehicles.Models;
+﻿namespace Shahrah.Transporter.Application.Vehicles.Models;
 
 public class ReadyVehiclesLookupDto
 {

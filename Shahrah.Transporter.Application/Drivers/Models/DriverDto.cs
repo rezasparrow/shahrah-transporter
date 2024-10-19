@@ -1,5 +1,4 @@
 ﻿using Shahrah.Transporter.Application.Vehicles.Models;
-using System;
 
 namespace Shahrah.Transporter.Application.Drivers.Models
 {

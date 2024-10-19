@@ -6,23 +6,13 @@ using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.Drivers.Services.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
 using SlimMessageBus;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Drivers.Services;
 
-public class DriverService : IDriverService
+public class DriverService(IApplicationDbContext dbContext, IMessageBus bus) : IDriverService
 {
-    private readonly IApplicationDbContext _dbContext;
-    private readonly IMessageBus _bus;
-
-    public DriverService(IApplicationDbContext dbContext, IMessageBus bus)
-    {
-        _dbContext = dbContext;
-        _bus = bus;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
+    private readonly IMessageBus _bus = bus;
 
     public async Task<AllocateDriverResponse> SendMessageToDriverForAllocateDriver(int vehicleId, long personId, decimal price, Order order, CancellationToken cancellationToken)
     {

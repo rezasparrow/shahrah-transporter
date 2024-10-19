@@ -6,17 +6,10 @@ namespace Shahrah.Transporter.Application.Vehicles.Commands.AssignDriver;
 /// <summary>
 /// تخصیص راننده به ناوگان
 /// </summary>
-public class AssignDriverCommand : IRequest<Unit>, ITransactionalCommand
+public class AssignDriverCommand(long personId, int vehicleId, int driverId) : IRequest<Unit>, ITransactionalCommand
 {
-    public AssignDriverCommand(long personId, int vehicleId, int driverId)
-    {
-        VehicleId = vehicleId;
-        DriverId = driverId;
-        PersonId = personId;
-    }
+    public long PersonId { get; } = personId;
 
-    public long PersonId { get; }
-
-    public int VehicleId { get; }
-    public int DriverId { get; }
+    public int VehicleId { get; } = vehicleId;
+    public int DriverId { get; } = driverId;
 }

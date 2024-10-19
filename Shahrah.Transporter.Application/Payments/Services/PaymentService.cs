@@ -8,27 +8,15 @@ using Shahrah.Transporter.Application.Payments.Models;
 using Shahrah.Transporter.Application.Payments.Services.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
 using Shahrah.Transporter.Domain.Enums;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Payments.Services;
 
-public class PaymentService : IPaymentService
+public class PaymentService(AppSettings appSettings, IOnlinePayment onlinePayment, IApplicationDbContext dbContext, IOrderItemPaymentService orderItemPaymentService) : IPaymentService
 {
-    private readonly AppSettings _appSettings;
-    private readonly IOnlinePayment _onlinePayment;
-    private readonly IApplicationDbContext _dbContext;
-    private readonly IOrderItemPaymentService _orderItemPaymentService;
-
-    public PaymentService(AppSettings appSettings, IOnlinePayment onlinePayment, IApplicationDbContext dbContext, IOrderItemPaymentService orderItemPaymentService)
-    {
-        _appSettings = appSettings;
-        _onlinePayment = onlinePayment;
-        _dbContext = dbContext;
-        _orderItemPaymentService = orderItemPaymentService;
-    }
+    private readonly AppSettings _appSettings = appSettings;
+    private readonly IOnlinePayment _onlinePayment = onlinePayment;
+    private readonly IApplicationDbContext _dbContext = dbContext;
+    private readonly IOrderItemPaymentService _orderItemPaymentService = orderItemPaymentService;
 
     public async Task<IPaymentRequestResult> ChargeWallet(long personId, GatewayType gateway, decimal amount, CancellationToken cancellationToken = default)
     {

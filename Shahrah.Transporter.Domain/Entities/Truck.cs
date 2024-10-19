@@ -1,14 +1,9 @@
 ﻿using Shahrah.Framework.Models;
-using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Domain.Entities;
 
-public class Truck : Entity<int>
+public class Truck(int id) : Entity<int>(id)
 {
-    public Truck(int id) : base(id)
-    {
-    }
-
     public string Title { get; set; }
     public double Height { get; set; }
     public double Width { get; set; }

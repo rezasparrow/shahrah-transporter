@@ -2,12 +2,7 @@
 
 namespace Shahrah.Transporter.Application.Drivers.Queries.GetDrivers;
 
-public class GetDriversQuery : IRequest<Framework.Models.Driver>
+public class GetDriversQuery(string nationalCode) : IRequest<Framework.Models.Driver>
 {
-    public GetDriversQuery(string nationalCode)
-    {
-        NationalCode = nationalCode;
-    }
-
-    public string NationalCode { get; set; }
+    public string NationalCode { get; set; } = nationalCode;
 }

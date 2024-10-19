@@ -2,8 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shahrah.Framework.Data;
 using Shahrah.Transporter.Domain.Entities;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Shahrah.Transporter.Infrastructure.Persistence.Configurations;
 

@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.targets = Directory.Build.targets
 	EndProjectSection
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{733890DA-D8F5-4C6E-B1D0-8465C58920C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,18 @@ Global
 		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Release|x64.Build.0 = Release|Any CPU
 		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Release|x86.ActiveCfg = Release|Any CPU
 		{BD5E54AF-6139-4DCF-AC73-84DF1ED6641B}.Release|x86.Build.0 = Release|Any CPU
+		{733890DA-D8F5-4C6E-B1D0-8465C58920C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{733890DA-D8F5-4C6E-B1D0-8465C58920C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{733890DA-D8F5-4C6E-B1D0-8465C58920C5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{733890DA-D8F5-4C6E-B1D0-8465C58920C5}.Debug|x64.Build.0 = Debug|Any CPU
+		{733890DA-D8F5-4C6E-B1D0-8465C58920C5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{733890DA-D8F5-4C6E-B1D0-8465C58920C5}.Debug|x86.Build.0 = Debug|Any CPU
+		{733890DA-D8F5-4C6E-B1D0-8465C58920C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{733890DA-D8F5-4C6E-B1D0-8465C58920C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{733890DA-D8F5-4C6E-B1D0-8465C58920C5}.Release|x64.ActiveCfg = Release|Any CPU
+		{733890DA-D8F5-4C6E-B1D0-8465C58920C5}.Release|x64.Build.0 = Release|Any CPU
+		{733890DA-D8F5-4C6E-B1D0-8465C58920C5}.Release|x86.ActiveCfg = Release|Any CPU
+		{733890DA-D8F5-4C6E-B1D0-8465C58920C5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

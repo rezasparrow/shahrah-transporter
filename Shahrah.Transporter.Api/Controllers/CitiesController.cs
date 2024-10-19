@@ -3,20 +3,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shahrah.Transporter.Application.Lookups.Models;
 using Shahrah.Transporter.Application.Lookups.Queries.GetCities;
-using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class CitiesController : BaseController
+public class CitiesController(IMediator mediator) : BaseController
 {
-    private readonly IMediator _mediator;
-
-    public CitiesController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    private readonly IMediator _mediator = mediator;
 
     [HttpGet]
     [AllowAnonymous]

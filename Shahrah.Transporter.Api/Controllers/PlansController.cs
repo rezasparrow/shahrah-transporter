@@ -2,20 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Shahrah.Transporter.Application.Lookups.Models;
 using Shahrah.Transporter.Application.Lookups.Queries.GetPlans;
-using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class PlansController : BaseController
+public class PlansController(IMediator mediator) : BaseController
 {
-    private readonly IMediator _mediator;
-
-    public PlansController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    private readonly IMediator _mediator = mediator;
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<PlanDto>), (int)HttpStatusCode.OK)]

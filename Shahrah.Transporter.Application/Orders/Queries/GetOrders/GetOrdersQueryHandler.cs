@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using Shahrah.Transporter.Application.Orders.Models;
@@ -11,14 +6,9 @@ using Shahrah.Transporter.Domain.Enums;
 
 namespace Shahrah.Transporter.Application.Orders.Queries.GetOrders;
 
-public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, IEnumerable<OrderDto>>
+public class GetOrdersQueryHandler(IApplicationDbContext dbContext) : IRequestHandler<GetOrdersQuery, IEnumerable<OrderDto>>
 {
-    private readonly IApplicationDbContext _dbContext;
-
-    public GetOrdersQueryHandler(IApplicationDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task<IEnumerable<OrderDto>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
     {

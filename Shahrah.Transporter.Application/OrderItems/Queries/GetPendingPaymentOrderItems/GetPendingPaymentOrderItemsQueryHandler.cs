@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shahrah.Framework.Extensions;
 using Shahrah.Transporter.Application.Common.Interfaces;
@@ -13,17 +9,11 @@ using Shahrah.Transporter.Domain.Models.DataTransferObjects;
 
 namespace Shahrah.Transporter.Application.OrderItems.Queries.GetPendingPaymentOrderItems;
 
-public class GetPendingPaymentOrderItemsQueryHandler : IRequestHandler<GetPendingPaymentOrderItemsQuery, IEnumerable<OrderItemDto>>
+public class GetPendingPaymentOrderItemsQueryHandler(IApplicationDbContext dbContext,
+     AppSettings appSettings) : IRequestHandler<GetPendingPaymentOrderItemsQuery, IEnumerable<OrderItemDto>>
 {
-    private readonly IApplicationDbContext _dbContext;
-    private readonly AppSettings _appSettings;
-
-    public GetPendingPaymentOrderItemsQueryHandler(IApplicationDbContext dbContext,
-         AppSettings appSettings)
-    {
-        _dbContext = dbContext;
-        _appSettings = appSettings;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
+    private readonly AppSettings _appSettings = appSettings;
 
     public async Task<IEnumerable<OrderItemDto>> Handle(GetPendingPaymentOrderItemsQuery request, CancellationToken cancellationToken)
     {

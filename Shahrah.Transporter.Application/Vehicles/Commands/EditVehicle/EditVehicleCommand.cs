@@ -4,14 +4,8 @@ using Shahrah.Transporter.Application.Vehicles.Models;
 
 namespace Shahrah.Transporter.Application.Vehicles.Commands.EditVehicle;
 
-public class EditVehicleCommand : IRequest<Unit>, ITransactionalCommand
+public class EditVehicleCommand(EditVehicleDto vehicle, long personId) : IRequest<Unit>, ITransactionalCommand
 {
-    public EditVehicleCommand(EditVehicleDto vehicle, long personId)
-    {
-        Vehicle = vehicle;
-        PersonId = personId;
-    }
-
-    public EditVehicleDto Vehicle { get; }
-    public long PersonId { get; }
+    public EditVehicleDto Vehicle { get; } = vehicle;
+    public long PersonId { get; } = personId;
 }

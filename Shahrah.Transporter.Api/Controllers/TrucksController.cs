@@ -4,20 +4,13 @@ using Shahrah.Transporter.Application.Lookups.Models;
 using Shahrah.Transporter.Application.Lookups.Queries.GetOptions;
 using Shahrah.Transporter.Application.Lookups.Queries.GetTrucks;
 using Shahrah.Transporter.Application.Lookups.Queries.GetTruksByLoadWeight;
-using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class TrucksController : BaseController
+public class TrucksController(IMediator mediator) : BaseController
 {
-    private readonly IMediator _mediator;
-
-    public TrucksController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    private readonly IMediator _mediator = mediator;
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<TruckDto>), (int)HttpStatusCode.OK)]

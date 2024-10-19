@@ -11,23 +11,14 @@ using Shahrah.Transporter.Application.People.Commands.DeleteAgent;
 using Shahrah.Transporter.Application.People.Models;
 using Shahrah.Transporter.Application.People.Queries.GetAgent;
 using Shahrah.Transporter.Application.People.Queries.GetAgents;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Api.Controllers;
 
-public class AgentsController : BaseController
+public class AgentsController(IMediator mediator, ICurrentUserService currentUserService) : BaseController
 {
-    private readonly IMediator _mediator;
-    private readonly ICurrentUserService _currentUserService;
-
-    public AgentsController(IMediator mediator, ICurrentUserService currentUserService)
-    {
-        _mediator = mediator;
-        _currentUserService = currentUserService;
-    }
+    private readonly IMediator _mediator = mediator;
+    private readonly ICurrentUserService _currentUserService = currentUserService;
 
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<PersonDto>), (int)HttpStatusCode.OK)]

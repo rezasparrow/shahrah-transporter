@@ -2,9 +2,6 @@
 using Shahrah.Transporter.Application.People.Commands.AgentEdit;
 using Shahrah.Transporter.Application.People.Commands.DeleteAgent;
 using Shahrah.Transporter.Domain.Entities;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.People.Services.Interfaces;
 

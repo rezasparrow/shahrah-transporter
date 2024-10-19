@@ -1,19 +1,12 @@
 ﻿using MediatR;
 using Shahrah.Transporter.Application.Orders.Models;
 using Shahrah.Transporter.Application.Orders.Services.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.Queries.GetOrder;
 
-public class GetOrderQueryHandler : IRequestHandler<GetOrderQuery, OrderDto>
+public class GetOrderQueryHandler(IOrderQueryService orderQueryService) : IRequestHandler<GetOrderQuery, OrderDto>
 {
-    private readonly IOrderQueryService _orderQueryService;
-
-    public GetOrderQueryHandler(IOrderQueryService orderQueryService)
-    {
-        _orderQueryService = orderQueryService;
-    }
+    private readonly IOrderQueryService _orderQueryService = orderQueryService;
 
     public async Task<OrderDto> Handle(GetOrderQuery request, CancellationToken cancellationToken)
     {

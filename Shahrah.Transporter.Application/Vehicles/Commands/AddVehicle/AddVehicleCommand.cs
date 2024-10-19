@@ -4,14 +4,8 @@ using Shahrah.Transporter.Application.Vehicles.Models;
 
 namespace Shahrah.Transporter.Application.Vehicles.Commands.AddVehicle;
 
-public class AddVehicleCommand : IRequest<Unit>, ITransactionalCommand
+public class AddVehicleCommand(AddVehicleDto vehicle, long personId) : IRequest<Unit>, ITransactionalCommand
 {
-    public AddVehicleCommand(AddVehicleDto vehicle, long personId)
-    {
-        Vehicle = vehicle;
-        PersonId = personId;
-    }
-
-    public AddVehicleDto Vehicle { get; }
-    public long PersonId { get; }
+    public AddVehicleDto Vehicle { get; } = vehicle;
+    public long PersonId { get; } = personId;
 }

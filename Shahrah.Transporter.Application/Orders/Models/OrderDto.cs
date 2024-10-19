@@ -1,8 +1,6 @@
 ﻿using Shahrah.Framework.Extensions;
 using Shahrah.Transporter.Domain.Entities;
 using Shahrah.Transporter.Domain.Models.DataTransferObjects;
-using System;
-using System.Linq;
 using Shahrah.Transporter.Domain.Enums;
 
 namespace Shahrah.Transporter.Application.Orders.Models;

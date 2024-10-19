@@ -1,8 +1,6 @@
 ﻿using Parbad;
 using Shahrah.Framework.Payment;
 using Shahrah.Transporter.Application.Payments.Models;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Payments.Services.Interfaces;
 

@@ -3,19 +3,12 @@ using Shahrah.Framework.Models;
 using Shahrah.Framework.Requests;
 using Shahrah.Framework.Responses;
 using Shahrah.Transporter.Application.Transporters.Queries.GetInProvinceTransporters;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Transporters.RequestHandlers;
 
-public class FindTransporterRequestHandler : SlimMessageBus.IRequestHandler<FindTransporterRequest, FindTransporterResponse>
+public class FindTransporterRequestHandler(IMediator mediator) : SlimMessageBus.IRequestHandler<FindTransporterRequest, FindTransporterResponse>
 {
-    private readonly IMediator _mediator;
-
-    public FindTransporterRequestHandler(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    private readonly IMediator _mediator = mediator;
 
     public async Task<FindTransporterResponse> OnHandle(FindTransporterRequest request)
     {

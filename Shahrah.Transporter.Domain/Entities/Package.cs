@@ -1,14 +1,9 @@
 ﻿using Shahrah.Framework.Models;
-using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Domain.Entities;
 
-public class Package : Entity<int>
+public class Package(int id) : Entity<int>(id)
 {
-    public Package(int id) : base(id)
-    {
-    }
-
     public string Title { get; set; }
 
     public ICollection<Order> Orders { get; set; }

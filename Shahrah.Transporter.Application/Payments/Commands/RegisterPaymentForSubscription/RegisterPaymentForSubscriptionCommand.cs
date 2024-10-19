@@ -8,18 +8,11 @@ namespace Shahrah.Transporter.Application.Payments.Commands.RegisterPaymentForSu
 /// <summary>
 /// خرید اشتراک
 /// </summary>
-public class RegisterPaymentForSubscriptionCommand : IRequest<IPaymentRequestResult>, ITransactionalCommand
+public class RegisterPaymentForSubscriptionCommand(GatewayType selectedGateway, int planId, long personId) : IRequest<IPaymentRequestResult>, ITransactionalCommand
 {
-    public RegisterPaymentForSubscriptionCommand(GatewayType selectedGateway, int planId, long personId)
-    {
-        SelectedGateway = selectedGateway;
-        PlanId = planId;
-        PersonId = personId;
-    }
+    public long PersonId { get; set; } = personId;
 
-    public long PersonId { get; set; }
+    public GatewayType SelectedGateway { get; } = selectedGateway;
 
-    public GatewayType SelectedGateway { get; }
-
-    public int PlanId { get; }
+    public int PlanId { get; } = planId;
 }

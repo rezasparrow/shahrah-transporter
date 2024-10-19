@@ -1,14 +1,9 @@
 ﻿using Shahrah.Framework.Models;
-using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Domain.Entities;
 
-public class City : Entity<int>
+public class City(int id) : Entity<int>(id)
 {
-    public City(int id) : base(id)
-    {
-    }
-
     public string Name { get; set; }
     public int ProvinceId { get; set; }
     public Province Province { get; set; }

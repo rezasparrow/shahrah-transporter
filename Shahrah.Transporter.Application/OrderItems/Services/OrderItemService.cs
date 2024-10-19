@@ -12,32 +12,19 @@ using Shahrah.Transporter.Application.Orders.Commands.CloseOrder;
 using Shahrah.Transporter.Application.Orders.Services.Interfaces;
 using Shahrah.Transporter.Domain.Enums;
 using SlimMessageBus;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using OrderItemStatus = Shahrah.Transporter.Domain.Enums.OrderItemStatus;
 
 namespace Shahrah.Transporter.Application.OrderItems.Services;
 
-public class OrderItemService : IOrderItemService
+public class OrderItemService(IApplicationDbContext dbContext, IMessageBus messageBus,
+    INotificationService notificationService, ICloseOrderService closeOrderService, IFinancialTransactionService financialTransactionService, OrderItemChangeStateEventPublisher orderItemChangeStateEventPublisher) : IOrderItemService
 {
-    private readonly IApplicationDbContext _dbContext;
-    private readonly IMessageBus _messageBus;
-    private readonly INotificationService _notificationService;
-    private readonly ICloseOrderService _closeOrderService;
-    private readonly IFinancialTransactionService _financialTransactionService;
-    private readonly OrderItemChangeStateEventPublisher _orderItemChangeStateEventPublisher;
-
-    public OrderItemService(IApplicationDbContext dbContext, IMessageBus messageBus,
-        INotificationService notificationService, ICloseOrderService closeOrderService, IFinancialTransactionService financialTransactionService, OrderItemChangeStateEventPublisher orderItemChangeStateEventPublisher)
-    {
-        _dbContext = dbContext;
-        _messageBus = messageBus;
-        _notificationService = notificationService;
-        _closeOrderService = closeOrderService;
-        _financialTransactionService = financialTransactionService;
-        _orderItemChangeStateEventPublisher = orderItemChangeStateEventPublisher;
-    }
+    private readonly IApplicationDbContext _dbContext = dbContext;
+    private readonly IMessageBus _messageBus = messageBus;
+    private readonly INotificationService _notificationService = notificationService;
+    private readonly ICloseOrderService _closeOrderService = closeOrderService;
+    private readonly IFinancialTransactionService _financialTransactionService = financialTransactionService;
+    private readonly OrderItemChangeStateEventPublisher _orderItemChangeStateEventPublisher = orderItemChangeStateEventPublisher;
 
     public async Task<bool> GotoNextStateIfLoadingConfirmed(int orderItemId,
         CancellationToken cancellationToken = default)

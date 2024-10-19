@@ -1,7 +1,5 @@
 ﻿using Shahrah.Framework.Resources;
 using Shahrah.Transporter.Application.Orders.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Shahrah.Transporter.Api.Models;
@@ -42,7 +40,17 @@ public class OrderModel
     [Required(ErrorMessageResourceName = "RequiredError", ErrorMessageResourceType = typeof(ErrorMessageResource))]
     public int TruckId { get; set; }
 
-    public List<int> VehicleOptionItems { get; set; } = [];
+    private List<int> _vehicleOptionItems = [];
+    public List<int> VehicleOptionItems
+    {
+        get { return _vehicleOptionItems; }
+        set
+        {
+            if (value == null)
+                return;
+            _vehicleOptionItems = value;
+        }
+    }
 
     public bool IsWeighStationrequire { get; set; }
 

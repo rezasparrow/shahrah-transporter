@@ -1,5 +1,4 @@
-﻿using System;
-using FluentValidation;
+﻿using FluentValidation;
 using Shahrah.Framework.Resources;
 using Shahrah.Framework.Validators;
 

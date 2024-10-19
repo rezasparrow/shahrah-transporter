@@ -1,7 +1,6 @@
 ﻿using Shahrah.Transporter.Application.FinancialTransactions.Services.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
 using Shahrah.Transporter.Domain.Enums;
-using System;
 
 namespace Shahrah.Transporter.Application.FinancialTransactions.Services;
 
@@ -39,12 +38,8 @@ public class FinancialTransactionBuilder
     }
 }
 
-public sealed class FinancialTransactionBuilderFinal : FinancialTransactionBuilder, IFinancialTransactionBuilder
+public sealed class FinancialTransactionBuilderFinal(FinancialTransaction financialTransaction) : FinancialTransactionBuilder(financialTransaction), IFinancialTransactionBuilder
 {
-    public FinancialTransactionBuilderFinal(FinancialTransaction financialTransaction) : base(financialTransaction)
-    {
-    }
-
     public FinancialTransaction Build()
     {
         return FinancialTransaction;

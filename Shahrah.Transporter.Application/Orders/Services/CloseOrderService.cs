@@ -11,27 +11,15 @@ using Shahrah.Transporter.Application.Orders.Services.Interfaces;
 using Shahrah.Transporter.Domain.Entities;
 using Shahrah.Transporter.Domain.Enums;
 using SlimMessageBus;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.Services;
 
-public class CloseOrderService : ICloseOrderService
+public class CloseOrderService(IMessageBus messageBus, INotificationService notificationService, IJobScheduler jobScheduler, IApplicationDbContext dbContext) : ICloseOrderService
 {
-    private readonly IMessageBus _messageBus;
-    private readonly INotificationService _notificationService;
-    private readonly IJobScheduler _jobScheduler;
-    private readonly IApplicationDbContext _dbContext;
-
-    public CloseOrderService(IMessageBus messageBus, INotificationService notificationService, IJobScheduler jobScheduler, IApplicationDbContext dbContext)
-    {
-        _messageBus = messageBus;
-        _notificationService = notificationService;
-        _jobScheduler = jobScheduler;
-        _dbContext = dbContext;
-    }
+    private readonly IMessageBus _messageBus = messageBus;
+    private readonly INotificationService _notificationService = notificationService;
+    private readonly IJobScheduler _jobScheduler = jobScheduler;
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task Close(CloseOrderTypeEnum closeType, int orderId, long? personId, CancellationToken cancellationToken = default)
     {

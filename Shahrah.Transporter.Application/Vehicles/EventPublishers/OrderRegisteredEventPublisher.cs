@@ -2,21 +2,13 @@
 using Shahrah.Framework.Events;
 using Shahrah.Transporter.Application.Common.Interfaces;
 using SlimMessageBus;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shahrah.Transporter.Application.Orders.EventPublishers;
 
-public class TransportersVehicleUpdatedEventPublisher
+public class TransportersVehicleUpdatedEventPublisher(IMessageBus messageBus, IApplicationDbContext dbContext = null)
 {
-    private readonly IMessageBus _messageBus;
-    private readonly IApplicationDbContext _dbContext;
-
-    public TransportersVehicleUpdatedEventPublisher(IMessageBus messageBus, IApplicationDbContext dbContext = null)
-    {
-        _messageBus = messageBus;
-        _dbContext = dbContext;
-    }
+    private readonly IMessageBus _messageBus = messageBus;
+    private readonly IApplicationDbContext _dbContext = dbContext;
 
     public async Task Publish(int vehicleId)
     {

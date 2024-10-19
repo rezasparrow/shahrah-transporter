@@ -1,6 +1,4 @@
 ﻿using Shahrah.Framework.Models;
-using System;
-using System.Collections.Generic;
 
 namespace Shahrah.Transporter.Domain.Entities;
 
